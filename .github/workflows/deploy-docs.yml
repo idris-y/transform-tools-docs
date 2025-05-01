@@ -5,15 +5,16 @@ on:
     branches: # Trigger this workflow whenever changes are pushed to these branches
       - main # Or 'master', depending on your main branch name
 
+# Sets permissions for GitHub Actions to create and deploy to GitHub Pages
 permissions:
-  contents: write # Allow the workflow to write files (necessary for deploying to Pages)
-  pages: write    # Allow the workflow to manage Pages deployment
-  id-token: write # Allow authentication for Pages deployment
+  contents: read  # Allow the workflow to read files (for checkout)
+  pages: write    # Allow the workflow to deploy to Pages
+  id-token: write # Allow authentication with OIDC (required for deploy-pages)
 
 jobs:
-  deploy:
+  # Build job: Builds the documentation website
+  build:
     runs-on: ubuntu-latest # Use a standard Linux runner provided by GitHub
-
     steps:
       - name: Checkout code # Get the files from your repository
         uses: actions/checkout@v4
@@ -27,11 +28,26 @@ jobs:
         run: pip install mkdocs mkdocs-material
 
       - name: Build documentation # Run MkDocs to build the website
-        run: mkdocs build --clean # --clean removes old files before building
+        run: mkdocs build --clean # --clean removes old files before building into ./site
 
-      - name: Deploy to GitHub Pages # Use a specific action to deploy the built site
-        uses: peaceiris/actions-gh-pages@v4 # This action is common for deploying static sites
+      # Step to upload the built documentation as an artifact
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3 # Use the official upload action
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub provides this token automatically
-          publish_dir: ./site # The directory where MkDocs builds the site (defaults to 'site')
-          # publish_branch: gh-pages # Optional: specify a branch (v4 often handles this automatically)
+          path: ./site # The directory containing the built site files (created by mkdocs build)
+
+
+  # Deploy job: Deploys the artifact to GitHub Pages
+  deploy:
+    environment: # This job is linked to the GitHub Pages deployment environment
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Get the deployed URL after success
+
+    runs-on: ubuntu-latest # Use a standard Linux runner
+    needs: build # This job requires the 'build' job to complete successfully
+
+    steps:
+      # Step to deploy the uploaded artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment # Give this step an ID to reference its output (the URL)
+        uses: actions/deploy-pages@v4 # Use the official deploy action
