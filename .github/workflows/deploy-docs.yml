@@ -1,0 +1,37 @@
+name: Deploy Docs # A name for this workflow
+
+on:
+  push:
+    branches: # Trigger this workflow whenever changes are pushed to these branches
+      - main # Or 'master', depending on your main branch name
+
+permissions:
+  contents: write # Allow the workflow to write files (necessary for deploying to Pages)
+  pages: write    # Allow the workflow to manage Pages deployment
+  id-token: write # Allow authentication for Pages deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Use a standard Linux runner provided by GitHub
+
+    steps:
+      - name: Checkout code # Get the files from your repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python # Set up Python on the runner
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x # Use a recent Python version
+
+      - name: Install MkDocs and theme # Install the necessary tools
+        run: pip install mkdocs mkdocs-material
+
+      - name: Build documentation # Run MkDocs to build the website
+        run: mkdocs build --clean # --clean removes old files before building
+
+      - name: Deploy to GitHub Pages # Use a specific action to deploy the built site
+        uses: peaceiris/actions-gh-pages@v4 # This action is common for deploying static sites
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub provides this token automatically
+          publish_dir: ./site # The directory where MkDocs builds the site (defaults to 'site')
+          # publish_branch: gh-pages # Optional: specify a branch (v4 often handles this automatically)
