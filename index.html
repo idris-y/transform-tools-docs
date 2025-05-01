@@ -1,0 +1,828 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Transform Tools Addon Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.2afb09e1.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#transform-tools-addon-description-and-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Transform Tools Addon Documentation" class="md-header__button md-logo" aria-label="Transform Tools Addon Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Transform Tools Addon Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Transform Tools Addon - Description and Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Transform Tools Addon Documentation" class="md-nav__button md-logo" aria-label="Transform Tools Addon Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Transform Tools Addon Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Transform Tools Addon - Description and Documentation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transform Tools Addon - Description and Documentation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transform-tools-advanced-gizmo-control-precision-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transform Tools: Advanced Gizmo Control &amp; Precision Transformations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform Tools: Advanced Gizmo Control &amp; Precision Transformations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Features:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel Sections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel Sections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gizmo-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Gizmo Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-transformation-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Transformation Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-constrained-transforms-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Constrained Transforms Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-options-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Options Section
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transform-tools-advanced-gizmo-control-precision-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transform Tools: Advanced Gizmo Control &amp; Precision Transformations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform Tools: Advanced Gizmo Control &amp; Precision Transformations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Features:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Documentation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel Sections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Panel Sections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gizmo-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Gizmo Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-transformation-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Transformation Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-constrained-transforms-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Constrained Transforms Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-options-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Options Section
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="transform-tools-addon-description-and-documentation">Transform Tools Addon - Description and Documentation</h1>
+<hr />
+<h2 id="description">Description</h2>
+<h3 id="transform-tools-advanced-gizmo-control-precision-transformations">Transform Tools: Advanced Gizmo Control &amp; Precision Transformations</h3>
+<p>Transform Tools enhances object manipulation in Blender using <strong>custom 3D gizmos</strong> for precise transformation control. It works closely with Blender's core tools.</p>
+<h4 id="core-features">Core Features:</h4>
+<ul>
+<li><strong>Flexible Gizmo Definition:</strong> Define transformation origins and targets accurately. Create gizmos automatically from selections, interactively using Blender's 3D cursor, or update them based on existing elements.</li>
+<li><strong>Dual-Gizmo Transformations:</strong> Apply a transformation between the two gizmo states, using modes for full transform (location, rotation, scale), specific axis alignment, or location only.</li>
+<li><strong>Independent Custom Orientation:</strong> Use the Active gizmo as a custom transform orientation for standard Blender transform tools like Move, Rotate, Scale, etc.</li>
+<li><strong>Constrained Transforms:</strong> Execute transformations where selections move or rotate from the 3D Cursor position along a specified direction towards a calculated intersection point on a target line, plane, or center derived from the gizmo setup.</li>
+<li><strong>Advanced Options:</strong> Includes interpolation, duplication, edit-mode extrusion, axis flipping, and count repetition.</li>
+<li><strong>Gizmo Management:</strong> Provides tools to swap, copy/paste, undo/redo gizmo states, and control visibility.</li>
+</ul>
+<h4 id="workflow">Workflow:</h4>
+<p>The addon operates by <strong>defining the 'Previous' (start) and 'Active' (end) gizmo states, then applying transformations</strong> based on these states. This system facilitates precise pose-to-pose adjustments and complex constrained operations. It integrates with Blender's 3D Cursor for placement and initiating constrained actions.</p>
+<hr />
+<h2 id="user-documentation">User Documentation</h2>
+<h3 id="overview">Overview</h3>
+<p>Transform Tools provides enhanced transformation capabilities in Blender using custom 3D gizmos and dedicated operators. It allows for precise control over moving, rotating, and scaling objects and mesh components. The addon includes methods for:</p>
+<ul>
+<li>Transforming elements between two explicitly defined transform states using dual gizmos.</li>
+<li>Using a single gizmo as a custom orientation for standard Blender transform tools.</li>
+<li>Executing constrained transformations, where elements move or rotate from the 3D cursor position towards a computed intersection point with target geometry (a point, line, or plane) derived from the gizmos.</li>
+</ul>
+<p><strong>Core Workflow:</strong> The fundamental process involves:</p>
+<ol>
+<li><strong>Defining</strong> the 'Previous' gizmo (representing the start state).</li>
+<li><strong>Defining</strong> the 'Active' gizmo (representing the end state).</li>
+<li>Selecting the elements to modify.</li>
+<li><strong>Applying</strong> a transformation operation that uses the defined gizmos.</li>
+</ol>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li>Gizmos definition sources: selections, interactive clicking, 3D cursor state.</li>
+<li>Active gizmo can serve as a custom orientation for standard Blender tools via the <code>Toggle Orientation</code> operator.</li>
+<li>Utilizes Blender's 3D Cursor for interactive placement and as the origin for Constrained Transforms.</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<ol>
+<li>Go to <code>Edit &gt; Preferences &gt; Add-ons</code>.</li>
+<li>Click <code>Install</code> and select the downloaded addon <code>.zip</code> file.</li>
+<li>Find "Transform Tools" in the list and enable the checkbox.</li>
+<li>The panel will appear in the 3D View's Sidebar (N-Panel) under the "Transform Tools" tab.</li>
+</ol>
+<hr />
+<h3 id="panel-sections">Panel Sections</h3>
+<h4 id="1-gizmo-section">1. Gizmo Section</h4>
+<p>This section focuses on defining, manipulating, and managing the core gizmos.</p>
+<ul>
+<li>
+<p><strong><code>Create</code>:</strong> Interactively define the Active gizmo by clicking its origin, X-axis, and Y-axis endpoints in the 3D view.</p>
+<ul>
+<li><em>How it works:</em> This process uses the 3D Cursor system to determine where your clicks land in 3D space, respecting Blender's snapping settings and cursor depth.</li>
+<li><em>Cancellation &amp; Validation:</em><ul>
+<li>You can cancel the placement of the origin or axes using <code>ESC</code> or <code>Right Mouse Button</code>.</li>
+<li>If you cancel placing the <strong>origin</strong>, its position reverts based on the setting below.</li>
+<li>If you cancel placing an <strong>axis</strong> endpoint (X or Y), or if the manually placed axis is invalid (too short or aligned with a previous axis), that axis will be <strong>automatically created</strong> using a reference orientation determined by the setting below.</li>
+<li>This fallback ensures a valid gizmo is always created.</li>
+</ul>
+</li>
+<li><em>Reference State for Cancellation/Auto-Creation:</em> The specific state used for origin cancellation revert and the orientation used for automatic axis creation depends on the <strong><code>(Icon) 3D Cursor Orientation</code></strong> setting (see description below).</li>
+<li><em>Final Cursor Update:</em> This operation always updates the 3D cursor's location and rotation upon successful completion, regardless of other settings.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>Get from selected</code>:</strong> Creates/updates gizmo states based on the current selection. The behavior differs depending on the mode and selection count:</p>
+<ul>
+<li><strong>Object Mode (1 object selected OR &gt;2 objects selected):</strong><ul>
+<li>Defines the <strong>Active gizmo</strong> using the transform of the single active object (if 1 selected) or the average transform (location, rotation, uniform scale factor) of all selected objects (if &gt;2 selected).</li>
+<li>The <strong>Previous gizmo</strong> is <em>only</em> updated if the <code>(Icon) Auto-Update Gizmos</code> option is enabled.</li>
+</ul>
+</li>
+<li><strong>Object Mode (Exactly 2 objects selected):</strong><ul>
+<li>Defines <strong>both gizmos directly</strong>, regardless of the <code>Auto-Update Gizmos</code> setting:<ul>
+<li>The <strong>Previous gizmo</strong> is defined using the transform of the non-active selected object (or the first object selected if neither is the active object).</li>
+<li>The <strong>Active gizmo</strong> is defined using the transform of the active selected object (or the second object selected if neither is the active object).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Edit Mode (Mesh):</strong><ul>
+<li>Defines the <strong>Active gizmo</strong> based on the selected component(s).</li>
+<li><em>Face:</em> Uses normal (Z), first edge (X/Y), center, and area (uniform scale).</li>
+<li><em>Edge:</em> Uses direction (X), connected face normals (Z), center, and length (uniform scale).</li>
+<li><em>Vertex/Multiple Elements:</em> Uses average location/normal and default uniform scale.</li>
+</ul>
+</li>
+<li><strong>Edit Mode (Curve/Armature):</strong><ul>
+<li>Defines the <strong>Active gizmo</strong> using location/rotation of selected points/bones. Scale factor from screen space.</li>
+</ul>
+</li>
+<li><strong>Nothing Selected:</strong><ul>
+<li>Defines the <strong>Active gizmo</strong> using the 3d cursor's current transform state.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>(Icon) <code>Auto-Update Gizmos</code>:</strong> (Parent icon) If enabled, whenever the <strong>Active Gizmo</strong> is defined or updated (e.g., via <code>Create</code>, <code>Get from selected</code>, <code>Paste</code>), the <strong>Previous Gizmo</strong> automatically takes the state of the <strong>former Active Gizmo</strong>. This ensures the two gizmos usually represent the 'before' and 'after' states of the last operation.</p>
+<ul>
+<li><em>Note:</em> This setting is overridden and has no effect when using <code>Get from selected</code> with exactly 2 objects, as both gizmos are defined directly from the selected objects in that specific case.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>(Icon) <code>Snap</code></code>:</strong> (Snap icon) Use the addon's snapping settings instead of current Blender's snap settings during interactive gizmo creation (<code>Create</code>).</p>
+</li>
+<li>
+<p><strong>(Icon) <code>3D Cursor Orientation</code>:</strong> (Cursor icon) This option controls the reference source used by the interactive <code>Create</code> operation when handling origin cancellation or performing automatic axis creation/alignment.</p>
+<ol>
+<li><em>Primary Effect (Reference for <code>Create</code>):</em><ul>
+<li><strong>When Enabled:</strong> The <code>Create</code> operation uses the current <strong>3D Cursor's state</strong> (location and rotation) as the reference.</li>
+<li><strong>When Disabled:</strong> The <code>Create</code> operation uses the state of the <strong>former Active Gizmo</strong> (the one active before <code>Create</code> began) as the reference.</li>
+</ul>
+</li>
+<li><em>Secondary Effect (Updating the 3D Cursor):</em><ul>
+<li><strong>When Enabled:</strong> Allows certain other addon operations (like <code>Get from selected</code>) to update the 3D cursor's location and rotation.</li>
+<li><strong>When Disabled:</strong> These addon operations will not automatically update the 3d cursor.</li>
+<li><em>(Note: The interactive <code>Create</code> operation </em>always<em> updates the 3d cursor upon completion, regardless of this setting).</em></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong><code>Swap</code>:</strong> Swaps the transform components (location, rotation, scale) of the Previous and Active gizmos.</p>
+</li>
+<li>
+<p><strong>(Icon) Axes Cycling:</strong> (Gimbal icon) Rotates the meaning of the Active gizmo's axes (X becomes Z, Y becomes X, Z becomes Y).</p>
+</li>
+<li>
+<p><strong>(Icon) Rotate:</strong> (Driver icon) Rotates the Active gizmo 90 degrees around its local X-axis.</p>
+</li>
+<li>
+<p><strong><code>Copy</code>:</strong> Copies the current transform components of the Active gizmo.</p>
+</li>
+<li>
+<p><strong><code>Paste</code>:</strong> Pastes the copied transform components onto the Active gizmo.</p>
+</li>
+<li>
+<p><strong>Swap/Paste Mode Dropdown</strong> (<code>Gizmo</code>/<code>Location</code>/<code>Rotation</code>/<code>Scale</code>): Controls which transform components (full state, location only, rotation only, or scale only) are affected by the <code>Swap</code> or <code>Paste</code> operations.</p>
+</li>
+<li>
+<p><strong>(Icons) Undo/Redo Gizmos:</strong> (Loop Back/Forward icons) Undo or redo changes made to the gizmo states themselves.</p>
+</li>
+<li>
+<p><strong><code>Toggle Orientation</code>:</strong> Switches Blender's Transform Orientation between the Active gizmo and the previously used standard orientation. This allows standard Blender operators like Move, Rotate, Scale, etc. to use the Active gizmo's precise alignment.</p>
+</li>
+<li>
+<p><strong>(Icon) <code>Fixed Visual Size</code>:</strong> (Fixed Size icon) Keeps the visual size of the gizmos consistent on screen as you zoom in or out. Doesn't affect transformations.</p>
+</li>
+<li>
+<p><strong>(Icon) <code>Gizmos Visibility</code>:</strong> (Eye icons) Cycles through showing both gizmos, only the Active gizmo, or hiding both.</p>
+</li>
+</ul>
+<h4 id="2-transformation-section">2. Transformation Section</h4>
+<p>These operations use both the Previous and Active gizmos to transform selections between the two defined states.</p>
+<ul>
+<li><strong><code>Transform</code>:</strong> Performs a full location and rotation transformation on the selected elements, moving them from the Previous gizmo's state to the Active gizmo's state.</li>
+<li><strong><code>Align</code>:</strong> Transforms the selection using only the location and the selected axis (<code>X</code>/<code>Y</code>/<code>Z</code>) of the gizmos. Select the axis to align with using the dropdown.</li>
+<li><strong><code>Move</code>:</strong> Moves the selection from the location of the Previous gizmo to the location of the Active gizmo, ignoring rotation.</li>
+<li><strong><em>Note on Scale:</em></strong> Whether the scale component of the gizmos is included in the <code>Transform</code>, <code>Align</code>, and <code>Move</code> operations depends on the state of the <code>Scale</code> checkbox in the <strong>Options Section</strong>.</li>
+<li><em>Requirement:</em> These buttons are disabled if both a Previous and Active gizmo haven't been defined.</li>
+</ul>
+<h4 id="3-constrained-transforms-section">3. Constrained Transforms Section</h4>
+<p>Perform transformations where selections move or rotate along defined directions towards a target, originating from the 3D Cursor.</p>
+<ul>
+<li><em>How it works:</em> These operations calculate the transformation starting from the 3D Cursor's current location. The direction of movement/rotation and the target geometry (point, line, plane) are determined by the settings chosen in this section, which reference the Previous and Active gizmo states.</li>
+<li><strong><code>Move to</code> / <code>Rotate to</code>:</strong> Buttons to enable/disable the respective constrained transform mode.<ul>
+<li><code>Move to</code>: Moves the selection starting from the 3D Cursor location along the <code>Constrain direction</code> until it hits or reaches the closest possible point to the target.</li>
+<li><code>Rotate to</code>: Rotates the selection starting from the 3D Cursor location around the specified <code>Constrain direction</code> axis (relative to the Previous gizmo) until it hits or reaches the closest possible point to the target.</li>
+</ul>
+</li>
+<li><strong><code>Apply</code>:</strong> Executes the enabled <code>Move to</code> or <code>Rotate to</code> operation.</li>
+<li><strong>Constrain direction:</strong> Defines the direction (for <code>Move to</code>) or the axis of rotation (for <code>Rotate to</code>) originating from the 3D Cursor.<ul>
+<li><em>Type (<code>Auto</code>/<code>Line</code>/<code>Plane</code>):</em> Defines how the constraint direction/axis is determined. Based on the <strong>Previous</strong> gizmo's orientation.<ul>
+<li><strong><code>Auto</code>:</strong> Automatically calculates the optimal path in 3D space to reach the target geometry, or the closest possible point to it:<ul>
+<li>For <code>Move to</code>, calculates the <strong>direction</strong> resulting in the <strong>shortest distance</strong> to the target. This path <strong>guarantees hitting the target</strong> (or closest reachable point).</li>
+<li>For <code>Rotate to</code>, calculates the <strong>rotation axis</strong> resulting in the <strong>smallest angle</strong> of rotation needed to reach the target, or the closest possible state to it.</li>
+</ul>
+</li>
+<li><code>Line</code>: Constrains movement/rotation <em>along</em> the selected <code>Axis</code> of the Previous gizmo.</li>
+<li><code>Plane</code>: Uses the selected <code>Axis</code> as the normal vector for the constraint plane. Automatically calculates the optimal path confined to this plane:<ul>
+<li>For <code>Move to</code>, calculates the direction <strong>within the plane</strong> (perpendicular to the normal <code>Axis</code>) that results in the shortest distance to reach the target, <strong>or the closest point to it</strong>.</li>
+<li>For <code>Rotate to</code>, calculates the optimal <strong>rotation axis lying within the plane</strong> (perpendicular to the normal <code>Axis</code>) that results in the <strong>smallest angle</strong> of rotation needed to reach the target, <strong>or the closest point to it</strong>.</li>
+<li>This calculated path within the plane <strong>guarantees reaching the target intersection</strong> (or the closest reachable point).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>Axis (<code>X</code>/<code>Y</code>/<code>Z</code>):</em> Selects the specific axis (X, Y, or Z of the <strong>Previous</strong> gizmo) to use when the <em>Type</em> is set to <code>Line</code> or <code>Plane</code>. Disabled for <code>Auto</code>.</li>
+</ul>
+</li>
+<li><strong>Target:</strong><ul>
+<li><em>Type (<code>Center</code>/<code>Line</code>/<code>Plane</code>):</em> Defines the target shape (point, line, or plane). Based on the <strong>Active</strong> gizmo.</li>
+<li><em>Direction (<code>X</code>/<code>Y</code>/<code>Z</code>):</em> Selects the specific axis (X, Y, or Z of the <strong>Active</strong> gizmo) to define the <code>Line</code> or <code>Plane</code> target. Disabled for <code>Center</code>.</li>
+</ul>
+</li>
+<li><strong><code>Snap Cursor</code>:</strong> This checkbox primarily affects operations within the <strong>Constrained Transforms Section</strong>:<ol>
+<li><strong>Setup Behavior:</strong> When enabled, selecting constraint types (<code>Auto</code>/<code>Line</code>/<code>Plane</code>) or target axes/directions automatically <strong>snaps the 3D Cursor to relevant geometry</strong> (e.g., axis origins, target points). This helps precisely set the starting point for the <code>Move To</code>/<code>Rotate To</code> operations <em>before</em> they are applied.</li>
+<li><strong>Post-Operation Behavior:</strong> By default (when <code>Snap Cursor</code> is unchecked), the <code>Move to</code> and <code>Rotate to</code> operations <strong>do not</strong> update the 3D Cursor's position/rotation after execution, preserving the original starting point. However, <strong>if <code>Snap Cursor</code> is enabled, <code>Move to</code> and <code>Rotate to</code> <em>will</em> update the 3D Cursor's location and rotation</strong> after they complete (typically placing the cursor at the final transformed location or target point reached). This makes their cursor update behavior consistent with how other transformation operations might behave (depending on the <code>(Icon) 3D Cursor Orientation</code> setting).</li>
+</ol>
+</li>
+<li><strong><code>Limit to Line</code>:</strong> If checked (and using <code>Line</code> target), rotation stops at the ends of the line segment defined by the gizmo axis.</li>
+</ul>
+<h4 id="4-options-section">4. Options Section</h4>
+<p>Modify the behavior of transformation operations (<code>Transform</code>, <code>Align</code>, <code>Move</code>, <code>Move to</code>, <code>Rotate to</code>).</p>
+<ul>
+<li><strong><code>Scale</code>:</strong> Include the <strong>uniform scale factor</strong> difference between the gizmos in the transformation calculations for operations in the <strong>Transformation Section</strong> (<code>Transform</code>, <code>Align</code>, <code>Move</code>). If unchecked, the scale component of the gizmos is ignored, and only location and rotation differences are applied.</li>
+<li><strong><code>Flip</code>:</strong> Rotates the Previous gizmo 180 degrees around its Y-axis before applying the transformation. Primarily used when transforming between two faces (e.g., on different objects) that should end up facing each other, rather than aligned in the same direction.</li>
+<li><strong><code>Duplicate</code>:</strong> Duplicates the selected elements before transforming them.</li>
+<li><strong><code>Extrude</code>:</strong> (Edit Mode Only for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both <code>Extrude</code> and <code>Duplicate</code> are enabled, <code>Extrude</code> overrides <code>Duplicate</code>; the elements will be extruded, not duplicated then transformed.</li>
+<li><strong><code>Interpolation Value</code>:</strong> Blends between the start (0.0) and end (1.0) transform states. The addon calculates the smooth spiral path between the two gizmo states required to get from the Previous to the Active state (using the shortest arc by default). This slider interpolates the transformation along that calculated path. Values outside the 0.0-1.0 range extrapolate along the path (negative values move in the opposite direction). <em>Values outside the 0 to 1 slider range must be entered manually.</em></li>
+<li><strong>(Icon) <code>Lock Interpolation</code>:</strong> (Lock/Unlock icon) If checked, the final transformation respects the <code>Interpolation Value</code> even when <code>Count</code> &gt; 1. If unchecked, <code>Count</code> repeats the <em>full</em> (1.0) transformation multiple times.</li>
+<li><strong><code>Count</code>:</strong> Repeats the calculated transformation multiple times.</li>
+<li><strong><code>Use Instance</code>:</strong> When <code>Duplicate</code> is checked, creates linked instances instead of full copies.</li>
+<li><strong><code>Longest Arc Path</code>:</strong> When checked, forces the underlying spiral path calculation (used for <code>Interpolation</code> and repeated <code>Count</code> operations) to use the longer arc (&gt;180 degrees) instead of the default shortest arc between the gizmo orientations.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
