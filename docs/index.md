@@ -2,7 +2,7 @@
 
 ---
 
-## Blendermarket Description
+## Description
 
 ### Transform Tools: Advanced Gizmo Control & Precision Transformations
 
