@@ -169,7 +169,14 @@ Modify the behavior of transformation operations (<code>Transform</code>, <code>
 *   **<code>Flip</code>:** Rotates the Previous gizmo 180 degrees around its Y-axis before applying the transformation. Primarily used when transforming between two faces (e.g., on different objects) that should end up facing each other, rather than aligned in the same direction.
 *   **<code>Duplicate</code>:** Duplicates the selected elements before transforming them.
 *   **<code>Extrude</code>:** (Edit Mode Only for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both <code>Extrude</code> and <code>Duplicate</code> are enabled, <code>Extrude</code> overrides <code>Duplicate</code>; the elements will be extruded, not duplicated then transformed.
-*   **<code>Interpolation Value</code>:** Blends between the start (0.0) and end (1.0) transform states. The addon calculates the smooth spiral path between the two gizmo states required to get from the Previous to the Active state (using the shortest arc by default). This slider interpolates the transformation along that calculated path. Values outside the 0.0-1.0 range extrapolate along the path (negative values move in the opposite direction). *Values outside the 0 to 1 slider range must be entered manually.*
+*   **<code>Interpolation Value</code>:** Controls the progression along the calculated transformation path between the Previous and Active gizmo states. The addon calculates the smooth spiral path required to transform from the Previous to the Active state (using the shortest arc by default).
+    *   The slider provides a range from **-1.0 to 1.0**, with a **default value of 1.0**.
+    *   **`1.0`**: Represents the full transformation to the Active gizmo state.
+    *   **`0.0`**: Represents the initial state (no transformation applied).
+    *   **`0.5`**: Represents the transformation halfway between the Previous and Active states.
+    *   **`-1.0`**: Reverses the transformation, effectively equivalent to swapping the Previous and Active gizmos.
+    *   Values between -1.0 and 1.0 interpolate the transformation along the calculated path.
+    *   Values outside the **-1.0 to 1.0** range (e.g., 10.00 or -1.62) extrapolate the transformation further along the calculated path in the respective direction and must be **entered manually** into the value field.
 *   **(Icon) <code>Lock Interpolation</code>:** (Lock/Unlock icon) If checked, the final transformation respects the <code>Interpolation Value</code> even when <code>Count</code> > 1. If unchecked, <code>Count</code> repeats the <em>full</em> (1.0) transformation multiple times.
 *   **<code>Count</code>:** Repeats the calculated transformation multiple times.
 *   **<code>Use Instance</code>:** When <code>Duplicate</code> is checked, creates linked instances instead of full copies.
