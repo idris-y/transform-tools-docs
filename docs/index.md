@@ -125,14 +125,16 @@ This section focuses on defining, manipulating, and managing the core gizmos.
         *   Ensures snapping works in both **Edit Mode and Object Mode**.
     *   *Refer to the "Working with the 3D Cursor and Snapping" section above for general information on Blender's snapping system.*
 
-*   ![3D Cursor Orientation Icon](assets/icons/3D_Cursor_Orientation.png) **3D Cursor Orientation**: This option controls the reference source used by the interactive `Create` operation when handling origin cancellation or performing automatic axis creation/alignment.
-    1.  *Primary Effect (Reference for <code>Create</code>):*
-        *   **When Enabled:** The `Create` operation uses the current **3D Cursor's state** (location and rotation) as the reference.
-        *   **When Disabled:** The `Create` operation uses the state of the **former Active Gizmo** (the one active before <code>Create</code> began) as the reference.
-    2.  *Secondary Effect (Updating the 3D Cursor):*
+*   ![3D Cursor Orientation Icon](assets/icons/3D_Cursor_Orientation.png) **3D Cursor Orientation**: This option primarily controls the reference **orientation and scale** used by the interactive `Create` operation when handling origin cancellation or performing automatic axis creation/alignment. The new gizmo's **origin location** will always be based on the 3D Cursor's current location if origin placement is cancelled.
+
+    1.  *Primary Effect (Reference for <code>Create</code>'s Orientation & Scale during Auto-Creation/Cancellation):*
+        *   **When Enabled:** If an axis needs to be auto-created or cancelled, the `Create` operation uses the current **3D Cursor's orientation** and derives a **scale factor from the screen space zoom level** as the reference.
+        *   **When Disabled:** If an axis needs to be auto-created or cancelled, the `Create` operation uses the **orientation and scale** from the **former Active Gizmo** (the one active before `Create` began) as the reference.
+
+    2.  *Secondary Effect (Updating the 3D Cursor by other operations):*
         *   **When Enabled:** Allows certain other addon operations (like `Get from selected`) to update the 3D cursor's location and rotation.
-        *   **When Disabled:** These addon operations will not automatically update the 3d cursor.
-        *   *(Note: The interactive `Create` operation *always* updates the 3d cursor upon completion, regardless of this setting).*
+        *   **When Disabled:** These other addon operations will not automatically update the 3D cursor.
+        *   *(Note: The interactive `Create` operation *always* updates the 3D cursor's location and rotation upon successful completion, regardless of this setting).*
 
 *   <span style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Swap</span>: Swaps the transform components (location, rotation, scale) of the Previous and Active gizmos.
 
