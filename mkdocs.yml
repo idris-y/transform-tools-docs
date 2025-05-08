@@ -1,3 +1,7 @@
-site_name: Transform Tools Addon Documentation
+site_name: Transform Tools Addon
+nav:
+- 'Documentation': 'index.md'
 theme:
   name: material
+  features:
+    - toc.integrate
