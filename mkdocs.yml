@@ -5,3 +5,5 @@ theme:
   name: material
   features:
     - toc.integrate
+extra_css:
+  - css/custom.css

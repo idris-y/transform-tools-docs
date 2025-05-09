@@ -1,0 +1,53 @@
+/* docs/css/custom.css */
+
+/* General highlight style for any targeted element (spans, etc.) */
+:target {
+  background-color: #B0E0E6; /* PowderBlue - Highlight color */
+  animation: highlight-fade 2.5s ease-out;
+  scroll-margin-top: 80px; /* Adjust this value based on your fixed header height */
+  padding: 3px 6px;
+  border-radius: 4px;
+  display: inline-block; /* Crucial for spans to show padding and background correctly */
+  /* Ensure the highlight has some visual separation if needed */
+  /* margin-bottom: 2px; */ /* Example */
+}
+
+/* IF you still want a slightly different style for when a header's *span* is targeted
+   compared to other general spans, you could add a more specific rule.
+   This targets spans that are direct children of h1-h6 tags AND are the target.
+   This can be useful if you want, for example, more padding for header highlights.
+*/
+h1 > span:target,
+h2 > span:target,
+h3 > span:target,
+h4 > span:target,
+h5 > span:target,
+h6 > span:target {
+    padding: 8px;       /* More padding for header text highlights */
+    margin-left: -8px;  /* Adjust if padding shifts alignment (due to inline-block on h-tags parent usually not needed) */
+    margin-right: -8px; /* Adjust if padding shifts alignment */
+    /* display: block; /* Optional: if you want the highlight to take full width, but inline-block on :target usually suffices */
+}
+
+
+/* Style for the outer span of "Move to / Rotate to" when it's targeted */
+#op-move-to-rotate-to:target {
+    background-color: #B0E0E6; /* Highlight color for the wrapper */
+    padding: 4px;
+    display: inline-block;
+    border-radius: 4px;
+    animation: highlight-fade 2.5s ease-out;
+}
+
+/* Define the fade animation */
+@keyframes highlight-fade {
+  0% {
+    background-color: #B0E0E6;
+  }
+  80% {
+    background-color: #B0E0E6;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
