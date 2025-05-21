@@ -27,15 +27,11 @@ The addon operates by **defining the 'Previous' (start) and 'Active' (end) gizmo
 
 ### Overview
 
-This documentation describes all features of the Transform Tools addon.
-Most features are available in **Transform Tools Lite (Free)**.
-Advanced features exclusive to the **Transform Tools (Full Version)** are clearly marked with `[Full Version Only]` at the head of their respective section or feature description. If a feature or an entire section is not specifically marked, it is available in both Lite and Full versions.
-
 Transform Tools provides enhanced transformation capabilities in Blender using custom 3D gizmos and dedicated operators. It allows for precise control over moving, rotating, and scaling objects and mesh components. The addon includes methods for:
 
 *   Transforming elements between two explicitly defined transform states using [dual gizmos](#transformation-section).
 *   Using a single gizmo as a [custom orientation](#op-toggle-orientation) for standard Blender transform tools.
-*   Executing [constrained transformations](#constrained-transforms-section) `[Full Version Only]`, where elements move or rotate from the 3D cursor position towards a computed intersection point with target geometry (a point, line, or plane) derived from the gizmos.
+*   Executing [constrained transformations](#constrained-transforms-section), where elements move or rotate from the 3D cursor position towards a computed intersection point with target geometry (a point, line, or plane) derived from the gizmos.
 
 **Core Workflow:** The fundamental process involves:
 
@@ -65,7 +61,7 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
 
 *   **Interactive Gizmo Creation ([`Create`](#op-create)):** Click locations are interpreted via the 3D Cursor system to determine positions in 3D space.
 *   **Gizmo Definition ([`Get from selected`](#op-get-from-selected)):** When nothing is selected, the Active gizmo is defined using the 3D Cursor's current transform.
-*   **[Constrained Transforms (`Move to` / `Rotate to`)](#constrained-transforms-section) `[Full Version Only]`:** The 3D Cursor's location acts as the *starting point* for these transformations.
+*   **[Constrained Transforms (`Move to` / `Rotate to`)](#constrained-transforms-section):** The 3D Cursor's location acts as the *starting point* for these transformations.
 
 **Positioning the 3D Cursor:** Accurate placement is often crucial. You can position it using:
 
@@ -159,19 +155,19 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
 #### <span id="transformation-section">2. Transformation Section</span>
 
 *   <span id="op-transform" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Transform</span>: Performs a full location and rotation transformation on the selected elements, moving them from the Previous gizmo's state to the Active gizmo's state. Behavior modified by [Options Section](#options-section) settings like [`Scale`](#opt-scale) and [`Flip`](#opt-flip).
-*   <span id="op-align" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Align</span> `[Full Version Only]`: Transforms the selection using only the location and the selected axis (<code>X</code>/<code>Y</code>/<code>Z</code>) of the gizmos. Select the axis to align with using the dropdown. Behavior modified by [Options Section](#options-section) settings like [`Scale`](#opt-scale) and [`Flip`](#opt-flip).
-*   <span id="op-move" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Move</span> `[Full Version Only]`: Moves the selection from the location of the Previous gizmo to the location of the Active gizmo, ignoring rotation. Behavior modified by [Options Section](#options-section) settings like [`Scale`](#opt-scale) and [`Flip`](#opt-flip).
+*   <span id="op-align" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Align</span>: Transforms the selection using only the location and the selected axis (<code>X</code>/<code>Y</code>/<code>Z</code>) of the gizmos. Select the axis to align with using the dropdown. Behavior modified by [Options Section](#options-section) settings like [`Scale`](#opt-scale) and [`Flip`](#opt-flip).
+*   <span id="op-move" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Move</span>: Moves the selection from the location of the Previous gizmo to the location of the Active gizmo, ignoring rotation. Behavior modified by [Options Section](#options-section) settings like [`Scale`](#opt-scale) and [`Flip`](#opt-flip).
 *   ***Note on Scale:*** Whether the scale component of the gizmos is included in the <code>Transform</code>, <code>Align</code>, and <code>Move</code> operations depends on the state of the [<code>Scale</code>](#opt-scale) checkbox in the [Options Section](#options-section).
 *   *Requirement:* These buttons are disabled if both a Previous and Active gizmo haven't been defined.
 
-#### <span id="constrained-transforms-section">3. Constrained Transforms Section `[Full Version Only]`</span>
+#### <span id="constrained-transforms-section">3. Constrained Transforms Section</span>
 
 Perform transformations where selections move or rotate along defined directions towards a target, originating **from the 3D Cursor's current position**.
 
 *   *How it works:* These operations calculate the transformation starting from the 3D Cursor's location. The direction of movement/rotation and the target geometry (point, line, plane) are determined by the settings chosen in this section, which reference the Previous and Active gizmo states.
     *   ***Important:*** *Ensure the 3D Cursor is positioned correctly **before** applying these operations. Refer to the ["Working with the 3D Cursor and Snapping"](#sec-cursor-snapping) section near the beginning of the documentation for positioning techniques.*
 
-*   <span id="op-move-to-rotate-to"> <!-- Outer span with ID for combined highlight -->
+*   <span id="op-move-to-rotate-to">
         <span style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Move to</span>
         <span style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Rotate to</span>
     </span>: Buttons to enable/disable the respective constrained transform mode.
@@ -206,7 +202,7 @@ Modify the behavior of transformation operations like [`Transform`](#op-transfor
 *   <span id="opt-flip">**<code>Flip</code>**</span>: Rotates the Previous gizmo 180 degrees around its Y-axis before applying the transformation. Primarily used when transforming between two faces (e.g., on different objects) that should end up facing each other, rather than aligned in the same direction.
 *   <span id="opt-duplicate">**<code>Duplicate</code>**</span>: Duplicates the selected elements before transforming them. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to), [`Rotate to`](#op-move-to-rotate-to).
 *   <span id="opt-extrude">**<code>Extrude</code>**</span>: (Edit Mode Only for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`; the elements will be extruded, not duplicated then transformed. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to), [`Rotate to`](#op-move-to-rotate-to).
-*   <span id="opt-interpolation-value">**<code>Interpolation Value</code>** `[Full Version Only]`</span>: Controls the progression along the calculated transformation path between the Previous and Active gizmo states. The addon calculates the smooth spiral path required to transform from the Previous to the Active state (using the shortest arc by default).
+*   <span id="opt-interpolation-value">**<code>Interpolation Value</code>**</span>: Controls the progression along the calculated transformation path between the Previous and Active gizmo states. The addon calculates the smooth spiral path required to transform from the Previous to the Active state (using the shortest arc by default).
     *   The slider provides a range from **-1.0 to 1.0**, with a **default value of 1.0**.
     *   **`1.0`**: Represents the full transformation to the Active gizmo state.
     *   **`0.0`**: Represents the initial state (no transformation applied).
@@ -214,7 +210,7 @@ Modify the behavior of transformation operations like [`Transform`](#op-transfor
     *   **`-1.0`**: Reverses the transformation, effectively equivalent to swapping the Previous and Active gizmos.
     *   Values between -1.0 and 1.0 interpolate the transformation along the calculated path.
     *   Values outside the **-1.0 to 1.0** range (e.g., 10.00 or -1.62) extrapolate the transformation further along the calculated path in the respective direction and must be **entered manually** into the value field.
-*   <span id="opt-lock-interpolation">![Lock Interpolation Icon](assets/icons/Lock_Interpolation.png) **Lock Interpolation**</span> `[Full Version Only]`: If checked, the final transformation respects the [`Interpolation Value`](#opt-interpolation-value) even when [`Count`](#opt-count) > 1. If unchecked, `Count` repeats the <em>full</em> (1.0) transformation multiple times.
-*   <span id="opt-count">**<code>Count</code>** `[Full Version Only]`</span>: Repeats the calculated transformation multiple times. Works with interpolation respecting the [Lock Interpolation](#opt-lock-interpolation) setting.
+*   <span id="opt-lock-interpolation">![Lock Interpolation Icon](assets/icons/Lock_Interpolation.png) **Lock Interpolation**</span>: If checked, the final transformation respects the [`Interpolation Value`](#opt-interpolation-value) even when [`Count`](#opt-count) > 1. If unchecked, `Count` repeats the <em>full</em> (1.0) transformation multiple times.
+*   <span id="opt-count">**<code>Count</code>**</span>: Repeats the calculated transformation multiple times. Works with interpolation respecting the [Lock Interpolation](#opt-lock-interpolation) setting.
 *   <span id="opt-use-instance">**<code>Use Instance</code>**</span>: When [`Duplicate`](#opt-duplicate) is checked, creates linked instances instead of full copies.
-*   <span id="opt-longest-arc">**<code>Longest Arc Path</code>** `[Full Version Only]`</span>: When checked, forces the underlying spiral path calculation (used for [`Interpolation`](#opt-interpolation-value) and repeated [`Count`](#opt-count) operations) to use the longer arc (>180 degrees) instead of the default shortest arc between the gizmo orientations.
+*   <span id="opt-longest-arc">**<code>Longest Arc Path</code>**</span>: When checked, forces the underlying spiral path calculation (used for [`Interpolation`](#opt-interpolation-value) and repeated [`Count`](#opt-count) operations) to use the longer arc (>180 degrees) instead of the default shortest arc between the gizmo orientations.
