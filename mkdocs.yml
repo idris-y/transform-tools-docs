@@ -1,9 +1,13 @@
 site_name: Transform Tools Addon
+
 nav:
-- 'Documentation': 'index.md'
+  - 'Main Version': 'index.md'      # Changed 'Documentation' to 'Main Version (full)' for clarity
+  - 'Core Version': 'core/index.md'  # Added this new line for the core docs
+
 theme:
   name: material
   features:
     - toc.integrate
+
 extra_css:
   - css/custom.css
