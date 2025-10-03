@@ -72,9 +72,9 @@ This section contains all the core tools for creating gizmos and executing the t
     *   *How it works:* This process uses the 3D Cursor system to determine where your clicks land in 3D space. It respects Blender's current header snapping settings.
     *   *Cancellation:* You can cancel the placement at any step using `ESC` or `Right Mouse Button`.
 
-*   <span id="op-undo-redo">![Undo Icon](assets/icons/Undo.png) ![Redo Icon](assets/icons/Redo.png) **Undo/Redo Gizmos**</span>: Undo or redo changes made to the gizmo states themselves.
+*   <span id="op-undo-redo">![Undo Icon](../assets/icons/Undo.png) ![Redo Icon](../assets/icons/Redo.png) **Undo/Redo Gizmos**</span>: Undo or redo changes made to the gizmo states themselves.
 
-*   <span id="opt-visibility">![Gizmos Visibility All Icon](assets/icons/Show_all_gizmos.png) **Gizmos Visibility**</span>: Cycles through the visibility states for the Previous and Active gizmos (Show Both, Show Active Only, Hide All).
+*   <span id="opt-visibility">![Gizmos Visibility All Icon](../assets/icons/Show_all_gizmos.png) **Gizmos Visibility**</span>: Cycles through the visibility states for the Previous and Active gizmos (Show Both, Show Active Only, Hide All).
 
 *   <span id="op-transform" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Transform</span>: Performs a full location, rotation, and uniform scale transformation on the selected elements, moving them from the Previous gizmo's state to the Active gizmo's state.
     *   *Requirement:* This button is disabled until both the Previous and Active gizmos have been defined.
