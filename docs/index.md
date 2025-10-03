@@ -30,7 +30,7 @@ The addon operates by **defining the 'Previous' (start) and 'Active' (end) gizmo
 Transform Tools provides enhanced transformation capabilities in Blender using custom 3D gizmos and dedicated operators. It allows for precise control over moving, rotating, and scaling objects and mesh components. The addon includes methods for:
 
 *   Transforming elements between two explicitly defined transform states using [dual gizmos](#transformation-section).
-*   Using a single gizmo as a [custom orientation](#op-toggle-orientation) for standard Blender transform tools.
+*   Using a single gizmo as a [custom orientation](#op-cursor-pivot) for standard Blender transform tools.
 *   Executing [constrained transformations](#constrained-transforms-section), where elements move or rotate from the 3D cursor position towards a computed intersection point with target geometry (a point, line, or plane) derived from the gizmos.
 
 **Core Workflow:** The fundamental process involves:
@@ -43,7 +43,7 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 **Key Concepts:**
 
 *   Gizmos definition sources: [selections](#op-get-from-selected), [interactive clicking](#op-create), [3D cursor state](#op-get-from-selected).
-*   Active gizmo can serve as a custom orientation for standard Blender tools via the [<code>Toggle Orientation</code>](#op-toggle-orientation) operator.
+*   Active gizmo can serve as a custom orientation for standard Blender tools via the [<code>Cursor Pivot</code>](#op-cursor-pivot) operator.
 *   Utilizes Blender's 3D Cursor for interactive placement and as the origin for [Constrained Transforms](#constrained-transforms-section).
 
 ### Installation
@@ -161,7 +161,7 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
 
 *   <span id="op-undo-redo">![Undo Icon](assets/icons/Undo.png) ![Redo Icon](assets/icons/Redo.png) **Undo/Redo Gizmos**</span>: Undo or redo changes made to the gizmo states themselves.
 
-*   <span id="op-toggle-orientation" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Toggle Orientation</span>: Switches Blender's Transform Orientation between the Active gizmo and the previously used standard orientation. This allows standard Blender operators like Move, Rotate, Scale, etc. to use the Active gizmo's precise alignment.
+*   <span id="op-cursor-pivot" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Cursor Pivot</span>: Switches Blender's Transform Orientation between the Active gizmo and the previously used standard orientation. This allows standard Blender operators like Move, Rotate, Scale, etc. to use the Active gizmo's precise alignment.
 
 *   <span id="opt-fixed-size">![Fixed Visual Size Icon](assets/icons/Fixed_Visual_Size.png) **Fixed Visual Size**</span>: Keeps the visual size of the gizmos consistent on screen as you zoom in or out. Doesn't affect transformations.
 
@@ -272,11 +272,9 @@ Modify the behavior of transformation operations like [`Transform`](#op-transfor
 
 *   <span id="opt-duplicate">**<code>Duplicate</code>**</span>: Duplicates the selected elements before transforming them. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
 
-*   <span id="opt-extrude">**<code>Extrude</code>**</span>: (Edit Mode Only for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`; the elements will be extruded, not duplicated then transformed. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
-
 *   <span id="redo-extrude-instance">**`Extrude` / `Instance` (Mode-Dependent Option)**</span>:
     *   **Function:** This option dynamically swaps between `Extrude` and `Instance` in the main option section and Redo menu based on the current mode.
-    *   **In Edit Mode (shows `Extrude`):** Turns the last operation into an extrusion.
+    *   **In Edit Mode (shows `Extrude`):**  (for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`; the elements will be extruded, not duplicated then transformed. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
     *   **In Object Mode (shows `Instance`):** Creates linked instances instead of full copies. The checkbox is visible, but only becomes active if `Duplicate` is also checked.
 
 *   <span id="opt-interpolation-value">**<code>Interpolation Value</code>**</span>: Controls the progression along the calculated transformation path between the Previous and Active gizmo states. The addon calculates the smooth spiral path required to transform from the Previous to the Active state (using the shortest arc by default).
@@ -317,10 +315,6 @@ These advanced options are **only available in the Redo Last menu**:
     *   **Critical Behavior Difference:** The axes they affect depend on the current mode:
         *   **In Object Mode:** Scaling is applied along the **object's own local X, Y, and Z axes**. This is standard non-uniform scaling, as an object's transform cannot be sheared directly.
         *   **In Edit Mode:** Scaling is applied along the **gizmo's custom axes**. This allows you to directly stretch and squash the selected geometry along any arbitrary orientation. Because this manipulates vertices directly, it can produce complex deformations and targeted shape changes that are impossible to achieve in Object Mode, which would require a combination of scaling and shearing.
-
-*   <span id="redo-extrude">**`Extrude`**</span>: (Edit Mode Only)
-    *   **Function:** This checkbox appears after a transformation in Edit Mode. When enabled, it retroactively changes the last operation from a simple transformation into an extrusion. The selected components are extruded along the transformation path instead of just being moved.
-    *   **Note:** If both `Extrude` and `Duplicate` are enabled, `Extrude` takes precedence.
     
 *   <span id="opt-longest-arc">**<code>Longest Arc Path</code>**</span>: When checked, forces the underlying spiral path calculation (used for [`Interpolation`](#opt-interpolation-value) and repeated [`Count`](#opt-count) operations) to use the longer arc (>180 degrees) instead of the default shortest arc between the gizmo orientations.
     *   **Availability:** This setting only affects operations that include a rotational component (e.g., `Transform`, `Rotate`, `Align`, `Rotate to`). It has no effect and will be disabled for pure translation or scaling operations like `Move` or `Scale`.
@@ -344,8 +338,6 @@ These advanced options are **only available in the Redo Last menu**:
 
 ### Standard Options
 The Redo Last menu also includes familiar settings like `Interpolation Value`, `Count`, `Duplicate`, `Instance`, `Flip`, etc. Changing these values will instantly update the result of your last transformation in the viewport, allowing for quick and iterative adjustments.
-
----
 
 ---
 
@@ -379,7 +371,7 @@ This behavior applies to all other options, including:
 *   `Skip Last`
 *   `Longest Arc Path`
 
-**Example:** If `Count` is 1 on your main panel, you can change it to 10 in the Redo menu to create 10 copies. After you are done, the `Count` on the main panel will still be 1 for your next operation.
+**Example:** If `Count` is 4 on your main panel, you can change it to 10 in the Redo menu to create 10 copies. After you are done, the `Count` on the main panel will still be 4 for your next operation.
 
 ---
 
