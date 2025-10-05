@@ -51,7 +51,7 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 1.  Go to `Edit > Preferences > Add-ons`.
 2.  Click `Install` and select the downloaded addon `.zip` file.
 3.  Find "Transform Tools" in the list and enable the checkbox.
-4.  The panel will appear in the 3D View's Sidebar (N-Panel) under the "TTools" tab aka "Transform Tools".
+4.  The panel will appear in the 3D View's Sidebar (N-Panel) under the "TTools" tab, aka "Transform Tools".
 
 ---
 
