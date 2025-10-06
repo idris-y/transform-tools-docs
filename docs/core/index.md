@@ -16,7 +16,7 @@ Transform Tools enhances object manipulation in Blender using **custom 3D gizmos
 
 #### Workflow:
 
-The addon operates by **defining the 'Previous' (start) and 'Active' (end) gizmo states, then applying transformations** based on these states. This system facilitates precise pose-to-pose adjustments and complex constrained operations. It integrates with Blender's 3D Cursor for placement and initiating constrained actions.
+The addon operates by **defining the 'Previous' (start) and 'Active' (end) gizmo states, then applying transformations** based on these states. This system facilitates precise pose-to-pose adjustments. It integrates with Blender's 3D Cursor for placement.
 
 ---
 
@@ -35,7 +35,7 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 1.  **Defining** the 'Previous' gizmo (representing the start state).
 2.  **Defining** the 'Active' gizmo (representing the end state).
 3.  Selecting the elements to modify.
-4.  **Applying** a transformation operation that uses the defined gizmos (like [<code>Transform</code>](#op-transform), [<code>Align</code>](#op-align), [<code>Move</code>](#op-move), or [Constrained Transforms](#constrained-transforms-section)).
+4.  **Applying** the transformation operation that uses the defined gizmos.
 
 **Key Concepts:**
 
@@ -54,11 +54,7 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 
 ### <span id="sec-cursor-snapping">Working with the 3D Cursor and Snapping</span>
 
-The **3D Cursor** plays a vital role in several Transform Tools operations:
-
-*   **Interactive Gizmo Creation ([`Create`](#op-create)):** Click locations are interpreted via the 3D Cursor system to determine positions in 3D space.
-*   **Gizmo Definition ([`Get from selected`](#op-get-from-selected)):** When nothing is selected, the Active gizmo is defined using the 3D Cursor's current transform.
-*   **[Constrained Transforms (`Move to` / `Rotate to`)](#constrained-transforms-section):** The 3D Cursor's location acts as the *starting point* for these transformations.
+The **3D Cursor** plays a vital role in [`Create`](#op-create) Gizmos operation:
 
 **Positioning the 3D Cursor:** Accurate placement is often crucial. You can position it using:
 
@@ -89,10 +85,10 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
     *   *Reference State for Cancellation/Auto-Creation:* The specific state used for origin cancellation revert and the orientation used for automatic axis creation depends on the [**<code>3D Cursor Orientation</code>**](#opt-cursor-orientation) setting (see description below).
     *   *Final Cursor Update:* This operation always updates the 3D cursor's location and rotation upon successful completion, regardless of other settings.
 
-*   <span id="opt-auto-update">![Auto-Update Gizmos Icon](assets/icons/Auto-Update_Gizmos.png) **Auto-Update Gizmos**</span>: If enabled, whenever the **Active Gizmo** is defined or updated (e.g., via [`Create`](#op-create), [`Get from selected`](#op-get-from-selected), [`Paste`](#op-paste)), the **Previous Gizmo** automatically takes the state of the **former Active Gizmo**. This ensures the two gizmos usually represent the 'before' and 'after' states of the last operation.
+*   <span id="opt-auto-update">![Auto-Update Gizmos Icon](../assets/icons/Auto-Update_Gizmos.png) **Auto-Update Gizmos**</span>: If enabled, whenever the **Active Gizmo** is defined or updated (e.g., via [`Create`](#op-create), [`Get from selected`](#op-get-from-selected), [`Paste`](#op-paste)), the **Previous Gizmo** automatically takes the state of the **former Active Gizmo**. This ensures the two gizmos usually represent the 'before' and 'after' states of the last operation.
     *   *Note:* This setting is overridden and has no effect when using [`Get from selected`](#op-get-from-selected) with exactly 2 objects, as both gizmos are defined directly from the selected objects in that specific case.
 
-*   <span id="opt-cursor-orientation">![3D Cursor Orientation Icon](assets/icons/3D_Cursor_Orientation.png) **3D Cursor Orientation**</span>: This option primarily controls the reference **orientation and scale** used by the interactive [`Create`](#op-create) operation when handling origin cancellation or performing automatic axis creation/alignment. The new gizmo's **origin location** will always be based on the 3D Cursor's current location if origin placement is cancelled.
+*   <span id="opt-cursor-orientation">![3D Cursor Orientation Icon](../assets/icons/3D_Cursor_Orientation.png) **3D Cursor Orientation**</span>: This option primarily controls the reference **orientation and scale** used by the interactive [`Create`](#op-create) operation when handling origin cancellation or performing automatic axis creation/alignment. The new gizmo's **origin location** will always be based on the 3D Cursor's current location if origin placement is cancelled.
     1.  *Primary Effect (Reference for <code>Create</code>'s Orientation & Scale during Auto-Creation/Cancellation):*
         *   **When Enabled:** If an axis needs to be auto-created or cancelled, the [`Create`](#op-create) operation uses the current **3D Cursor's orientation** and derives a **scale factor from the screen space zoom level** as the reference.
         *   **When Disabled:** If an axis needs to be auto-created or cancelled, the [`Create`](#op-create) operation uses the **orientation and scale** from the **former Active Gizmo** (the one active before [`Create`](#op-create) began) as the reference.
@@ -101,7 +97,7 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
         *   **When Disabled:** These other addon operations will not automatically update the 3D cursor.
         *   *(Note: The interactive [`Create`](#op-create) operation *always* updates the 3D cursor's location and rotation upon successful completion, regardless of this setting).*
 
-*   <span id="opt-snap">![Snap Icon](assets/icons/Snap.png) **Snap**</span>: When enabled, this forces the interactive [`Create`](#op-create) operation to use a specific, pre-defined set of snapping settings, **overriding** whatever snapping settings are currently active in Blender's 3D View header. When disabled, [`Create`](#op-create) respects Blender's current header snapping settings.
+*   <span id="opt-snap">![Snap Icon](../assets/icons/Snap.png) **Snap**</span>: When enabled, this forces the interactive [`Create`](#op-create) operation to use a specific, pre-defined set of snapping settings, **overriding** whatever snapping settings are currently active in Blender's 3D View header. When disabled, [`Create`](#op-create) respects Blender's current header snapping settings.
     *   *Addon's Internal Snap Behavior (When this toggle is ON):*
         *   Turns snapping **ON**.
         *   Sets snapping targets to **Vertex, Edge, Face, and Edge Midpoint**.
@@ -110,15 +106,17 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
         *   Ensures snapping works in both **Edit Mode and Object Mode**.
     *   *Refer to the ["Working with the 3D Cursor and Snapping"](#sec-cursor-snapping) section above for general information on Blender's snapping system.*
 
-*   <span id="op-undo-redo">![Undo Icon](assets/icons/Undo.png) ![Redo Icon](assets/icons/Redo.png) **Undo/Redo Gizmos**</span>: Undo or redo changes made to the gizmo states themselves.
+*   <span id="op-undo-redo">![Undo Icon](../assets/icons/Undo.png) ![Redo Icon](../assets/icons/Redo.png) **Undo/Redo Gizmos**</span>: Undo or redo changes made to the gizmo states themselves.
 
 *   <span id="op-cursor-pivot" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Cursor Pivot</span>: Switches Blender's Transform Orientation between the Active gizmo and the previously used standard orientation. This allows standard Blender operators like Move, Rotate, Scale, etc. to use the Active gizmo's precise alignment.
 
-*   <span id="opt-fixed-size">![Fixed Visual Size Icon](assets/icons/Fixed_Visual_Size.png) **Fixed Visual Size**</span>: Keeps the visual size of the gizmos consistent on screen as you zoom in or out. Doesn't affect transformations.
+*   <span id="opt-fixed-size">![Fixed Visual Size Icon](../assets/icons/Fixed_Visual_Size.png) **Fixed Visual Size**</span>: Keeps the visual size of the gizmos consistent on screen as you zoom in or out. Doesn't affect transformations.
 
-*   <span id="opt-visibility">![Gizmos Visibility All Icon](assets/icons/Show_all_gizmos.png) **Gizmos Visibility**</span>: Cycles through the visibility states for the Previous and Active gizmos. Clicking the icon toggles between: showing both gizmos ![Gizmos Visibility All Icon](assets/icons/Show_all_gizmos.png), showing only the Active gizmo ![Gizmos Visibility Active Icon](assets/icons/Show_only_the_active_gizmo.png), or hiding both gizmos ![Gizmos Visibility Hidden Icon](assets/icons/Hide_all_gizmos.png).
+*   <span id="opt-visibility">![Gizmos Visibility All Icon](../assets/icons/Show_all_gizmos.png) **Gizmos Visibility**</span>: Cycles through the visibility states for the Previous and Active gizmos. Clicking the icon toggles between: showing both gizmos ![Gizmos Visibility All Icon](../assets/icons/Show_all_gizmos.png), showing only the Active gizmo ![Gizmos Visibility Active Icon](../assets/icons/Show_only_the_active_gizmo.png), or hiding both gizmos ![Gizmos Visibility Hidden Icon](../assets/icons/Hide_all_gizmos.png).
+
 
 *   <span id="op-transform" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Transform</span>: Performs a full location and rotation transformation on the selected elements, moving them from the Previous gizmo's state to the Active gizmo's state. Behavior modified by [Options Section](#options-section) settings like [`Scale`](#opt-scale) and [`Flip`](#opt-flip).
+
 ---
 
 #### <span id="options-section">4. Options Section</span>
@@ -130,17 +128,16 @@ Modify the behavior of the [`Transform`](#op-transform) operation.
 
 *   <span id="opt-flip">**<code>Flip</code>**</span>: Rotates the Previous gizmo 180 degrees around its Y-axis before applying the transformation. Primarily used when transforming between two faces (e.g., on different objects) that should end up facing each other, rather than aligned in the same direction.
 
-*   <span id="opt-duplicate">**<code>Duplicate</code>**</span>: Duplicates the selected elements before transforming them. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
+*   <span id="opt-duplicate">**<code>Duplicate</code>**</span>: Duplicates the selected elements before transforming them.
+*   <span id="opt-instance">**<code>Instance</code>**</span>: *(Object Mode Only)* When [`Duplicate`](#opt-duplicate) is checked, creates linked instances instead of full copies.
 
-*   <span id="opt-extrude">**<code>Extrude</code>**</span>: (Edit Mode Only for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`; the elements will be extruded, not duplicated then transformed. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
+*   <span id="opt-extrude">**<code>Extrude</code>**</span>: *(Edit Mode Only for Mesh/Curve/Armature)* Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. *Note*: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`; the elements will be extruded, not duplicated then transformed.
 
-*   <span id="redo-extrude-instance">**`Extrude` / `Instance` (Mode-Dependent Option)**</span>:
-    *   **Function:** This option dynamically swaps between `Extrude` and `Instance` in the main option section and Redo menu based on the current mode.
-    *   **In Edit Mode (shows `Extrude`):** Turns the last operation into an extrusion.
-    *   **In Object Mode (shows `Instance`):** Creates linked instances instead of full copies. The checkbox is visible, but only becomes active if `Duplicate` is also checked.
-    *   **Note:** If both `Extrude` and `Duplicate` are enabled, `Extrude` takes precedence.
+*   ***Note:*** The `Instance` and `Extrude` options are contextual and replace each other in the UI. The option displayed depends on whether you are in **Object Mode** or **Edit Mode**.
 
-*   <span id="opt-use-instance">**<code>Use Instance</code>**</span>: When [`Duplicate`](#opt-duplicate) is checked, creates linked instances instead of full copies.
+*   <span id="opt-reverse">**<code>Reverse</code>**</span>: *(Redo Menu Only)* Inverts the direction of the transformation. When checked, the selected elements will transform from the Active gizmo's state back to the Previous gizmo's state, effectively swapping the start and end points for the operation.
+
+*   <span id="redo-complex-dup">**`Complex Dup`**</span>: This option uses a more robust but slower duplication method. This ensures that complex relationships, such as modifiers that target other duplicated objects, are updated correctly. It is recommended to leave this behavior active for the most reliable results. However, if you are duplicating a high number of simple objects and experience a noticeable slowdown, you can deactivate this compatibility mode in the operator's Redo Last (F9) menu for a significant performance increase.
 
 ---
 
@@ -151,44 +148,6 @@ After performing the [`Transform`](#op-transform) operation, a special menu beco
 **How to Access:**
 *   Press `F9` immediately after an operation.
 *   Or, click on the operator panel that appears in the bottom-left corner of the 3D Viewport.
-
-This menu contains all the standard options from the main panel, plus several **exclusive settings** that offer even greater control.
-
-
-### Exclusive Redo Last Settings
-
-These advanced options are **only available in the Redo Last menu**:
-
-*   <span id="redo-scale-axes">**`Individual Scale Axes (X, Y, Z)`**</span>:
-    *   **Function:** These checkboxes allow you to enable or disable scaling on individual axes *after* the operation has been performed, providing precise non-uniform scaling control.
-    *   **Availability:** These options become available when the `Scale` checkbox is active in the Redo Last menu. They are **enabled by default** when using the dedicated `Scale` or `Scale to` operators.
-    *   **Critical Behavior Difference:** The axes they affect depend on the current mode:
-        *   **In Object Mode:** Scaling is applied along the **object's own local X, Y, and Z axes**. This is standard non-uniform scaling, as an object's transform cannot be sheared directly.
-        *   **In Edit Mode:** Scaling is applied along the **gizmo's custom axes**. This allows you to directly stretch and squash the selected geometry along any arbitrary orientation. Because this manipulates vertices directly, it can produce complex deformations and targeted shape changes that are impossible to achieve in Object Mode, which would require a combination of scaling and shearing.
-    
-*   <span id="opt-longest-arc">**<code>Longest Arc Path</code>**</span>: When checked, forces the underlying spiral path calculation (used for [`Interpolation`](#opt-interpolation-value) and repeated [`Count`](#opt-count) operations) to use the longer arc (>180 degrees) instead of the default shortest arc between the gizmo orientations.
-    *   **Availability:** This setting only affects operations that include a rotational component (e.g., `Transform`, `Rotate`, `Align`, `Rotate to`). It has no effect and will be disabled for pure translation or scaling operations like `Move` or `Scale`.
-
-*   <span id="redo-skip-last">**`Skip Last`**</span>:
-    *   **Function:** Prevents the final iteration of a repeated (`Count` > 1) duplicate or extrusion from being created.
-    *   **Use Case:** This is ideal for creating arrays or series of objects *between* a start and end point. For example, to place 5 fence posts between two main pillars, you would set the transformation `Count` to 6 (to define the 6 steps/gaps) and enable `Skip Last`. This creates the 5 intermediate posts without an unnecessary sixth one at the final destination.
-    *   **Availability:** This checkbox is only active when either `Duplicate` or `Extrude` is enabled and the `Count` is set to a value greater than 1.
-
-*   <span id="redo-scale-multiplier">**`Scale Multiplier`**</span>:
-    *   **Function:** A slider that uniformly multiplies the final calculated scale of the entire transformation.
-    *   **Details:** This acts as a global, final adjustment. It applies on top of any scale derived from the `Scale` checkbox, the `Scale`/`Scale to` operators, or even non-uniform scaling via the individual axis checkboxes.
-    *   **Example:** If your operation results in a non-uniform scale of (2.0, 1.0, 1.0), setting the `Scale Multiplier` to 0.5 will result in a final scale of (1.0, 0.5, 0.5).
-
-*   <span id="redo-complex-dup">**`Complex Dup`**</span>:
-    *   **Function:** A more compatible, but slower, method for handling duplication.
-    *   **When to Use:** The addon's default duplication is highly optimized for speed. However, for certain advanced scenarios, it may not correctly update relationships between the newly created objects. Enable `Complex Dup` if you encounter issues such as:
-        *   Boolean modifiers on one duplicated object that need to target *another* object also being created in the same operation.
-        *   Other complex modifier stacks that rely on inter-object relationships that fail to update correctly.
-    *   **Performance Impact:** This mode uses Blender's standard operators to ensure maximum compatibility. This is significantly slower than the addon's default method, and the slowdown will be very noticeable when using a high `Count` or duplicating many elements at once. Use it only when necessary.
-
-### Standard Options
-The Redo Last menu also includes familiar settings (`Scsle`, `Duplicate`, `Instance`/`Extrude`, `Flip`). Changing these values will instantly update the result of your last transformation in the viewport, allowing for quick and iterative adjustments.
-
 ---
 
 **Session Persistence:** All settings on the main panel, including those persistently set via the Redo menu, will reset to their defaults when you restart Blender.

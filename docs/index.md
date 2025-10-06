@@ -61,7 +61,7 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
 
 *   **Interactive Gizmo Creation ([`Create`](#op-create)):** Click locations are interpreted via the 3D Cursor system to determine positions in 3D space.
 *   **Gizmo Definition ([`Get from selected`](#op-get-from-selected)):** When nothing is selected, the Active gizmo is defined using the 3D Cursor's current transform.
-*   **[Constrained Transforms (`Move to` / `Rotate to`)](#constrained-transforms-section):** The 3D Cursor's location acts as the *starting point* for these transformations.
+*   **[Constrained Transforms (`Move to`, `Rotate to`, `Scale to`)](#constrained-transforms-section):** The 3D Cursor's location acts as the *starting point* for these transformations.
 
 **Positioning the 3D Cursor:** Accurate placement is often crucial. You can position it using:
 
@@ -270,12 +270,13 @@ Modify the behavior of transformation operations like [`Transform`](#op-transfor
 
 *   <span id="opt-flip">**<code>Flip</code>**</span>: Rotates the Previous gizmo 180 degrees around its Y-axis before applying the transformation. Primarily used when transforming between two faces (e.g., on different objects) that should end up facing each other, rather than aligned in the same direction.
 
-*   <span id="opt-duplicate">**<code>Duplicate</code>**</span>: Duplicates the selected elements before transforming them. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
+*   <span id="opt-duplicate">**<code>Duplicate</code>**</span>: Duplicates the selected elements before transforming them.
 
-*   <span id="redo-extrude-instance">**`Extrude` / `Instance` (Mode-Dependent Option)**</span>:
-    *   **Function:** This option dynamically swaps between `Extrude` and `Instance` in the main option section and Redo menu based on the current mode.
-    *   **In Edit Mode (shows `Extrude`):**  (for Mesh/Curve/Armature) Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. Note: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`. Works with [`Transform`](#op-transform), [`Align`](#op-align), [`Move`](#op-move), [`Move to`](#op-move-to-rotate-to-scale-to), [`Rotate to`](#op-move-to-rotate-to-scale-to).
-    *   **In Object Mode (shows `Instance`):** Creates linked instances instead of full copies. The checkbox is visible, but only becomes active if `Duplicate` is also checked.
+*   <span id="opt-instance">**<code>Instance</code>**</span>: *(Object Mode Only)* When [`Duplicate`](#opt-duplicate) is checked, creates linked instances instead of full copies.
+
+*   <span id="opt-extrude">**<code>Extrude</code>**</span>: *(Edit Mode Only for Mesh/Curve/Armature)* Extrudes selected mesh components, curve points, or bones during the transformation instead of just moving them. *Note*: If both [`Extrude`](#opt-extrude) and [`Duplicate`](#opt-duplicate) are enabled, `Extrude` overrides `Duplicate`; the elements will be extruded, not duplicated then transformed.
+
+*   ***Note:*** The `Instance` and `Extrude` options are contextual and replace each other in the UI. The option displayed depends on whether you are in **Object Mode** or **Edit Mode**.
 
 *   <span id="opt-interpolation-value">**<code>Interpolation Value</code>**</span>: Controls the progression along the calculated transformation path between the Previous and Active gizmo states. The addon calculates the smooth spiral path required to transform from the Previous to the Active state (using the shortest arc by default).
     *   The slider provides a range from **-1.0 to 1.0**, with a **default value of 1.0**.
@@ -289,8 +290,6 @@ Modify the behavior of transformation operations like [`Transform`](#op-transfor
 *   <span id="opt-lock-interpolation">![Lock Interpolation Icon](assets/icons/Lock_Interpolation.png) **Lock Interpolation**</span>: If checked, the final transformation respects the [`Interpolation Value`](#opt-interpolation-value) even when [`Count`](#opt-count) > 1. If unchecked, `Count` repeats the <em>full</em> (1.0) transformation multiple times.
 
 *   <span id="opt-count">**<code>Count</code>**</span>: Repeats the calculated transformation multiple times. Works with interpolation respecting the [Lock Interpolation](#opt-lock-interpolation) setting.
-
-*   <span id="opt-use-instance">**<code>Use Instance</code>**</span>: When [`Duplicate`](#opt-duplicate) is checked, creates linked instances instead of full copies.
 
 ---
 
@@ -324,6 +323,23 @@ These advanced options are **only available in the Redo Last menu**:
     *   **Use Case:** This is ideal for creating arrays or series of objects *between* a start and end point. For example, to place 5 fence posts between two main pillars, you would set the transformation `Count` to 6 (to define the 6 steps/gaps) and enable `Skip Last`. This creates the 5 intermediate posts without an unnecessary sixth one at the final destination.
     *   **Availability:** This checkbox is only active when either `Duplicate` or `Extrude` is enabled and the `Count` is set to a value greater than 1.
 
+*   <span id="redo-chain-transform">**`Chain Transform`**</span>: This checkbox changes the behavior of the Multi-Transform operation. It **only has an effect when `Duplicate` is enabled and the `Count` is greater than one.** It switches the duplication logic between two distinct patterns: Independent and Sequential.
+
+    *   **Unchecked (Default): Independent "Star" Pattern**
+        *   **Behavior:** The transformation originates from the single **Active Gizmo** and is applied independently to *each* target gizmo in the multi-transform list.
+        *   **Analogy:** This creates a star-like or "octopus" pattern, where all transformation arrays radiate outwards from the central starting point.
+        *   **Transformation Path:**
+            *   `Start → Target 1`
+            *   `Start → Target 2`
+            *   `Start → Target 3`
+
+    *   **Checked: Sequential "Chain" Pattern**
+        *   **Behavior:** The transformations are applied sequentially in a continuous chain. The result of transforming to the first target becomes the starting point for the transformation to the second target, and so on.
+        *   **Analogy:** This creates a continuous, snake-like "python" or linked-chain pattern, where each segment follows the last.
+        *   **Transformation Path:** `Start → Target 1 → Target 2 → Target 3`
+
+*   ***Note:*** The `Chain Transform` and `Skip Last` options are contextual and replace each other in the UI. The option displayed depends on whether [`Multi-Transform`](#op-transform) mode is active.
+
 *   <span id="redo-scale-multiplier">**`Scale Multiplier`**</span>:
     *   **Function:** A slider that uniformly multiplies the final calculated scale of the entire transformation.
     *   **Details:** This acts as a global, final adjustment. It applies on top of any scale derived from the `Scale` checkbox, the `Scale`/`Scale to` operators, or even non-uniform scaling via the individual axis checkboxes.
@@ -334,7 +350,7 @@ These advanced options are **only available in the Redo Last menu**:
     *   **When to Use:** The addon's default duplication is highly optimized for speed. However, for certain advanced scenarios, it may not correctly update relationships between the newly created objects. Enable `Complex Dup` if you encounter issues such as:
         *   Boolean modifiers on one duplicated object that need to target *another* object also being created in the same operation.
         *   Other complex modifier stacks that rely on inter-object relationships that fail to update correctly.
-    *   **Performance Impact:** This mode uses Blender's standard operators to ensure maximum compatibility. This is significantly slower than the addon's default method, and the slowdown will be very noticeable when using a high `Count` or duplicating many elements at once. Use it only when necessary.
+    *   **Performance Impact:** This mode uses Blender's standard operators to ensure maximum compatibility. This is significantly slower than the addon's default method, and the slowdown will be noticeable when using a high `Count` or duplicating many elements at once. Use it only when necessary.
 
 ### Standard Options
 The Redo Last menu also includes familiar settings like `Interpolation Value`, `Count`, `Duplicate`, `Instance`, `Flip`, etc. Changing these values will instantly update the result of your last transformation in the viewport, allowing for quick and iterative adjustments.
