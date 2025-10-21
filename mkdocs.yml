@@ -1,7 +1,8 @@
 site_name: Transform Tools Addon
 
 nav:
-  - 'Main Version': 'index.md'      # Changed 'Documentation' to 'Main Version (full)' for clarity
+  - 'Full Version': 'index.md'      # Changed 'Documentation' to 'Main Version (full)' for clarity
+  - 'Lite Version': 'lite/index.md'  # Added this new line for the core docs
   - 'Core Version': 'core/index.md'  # Added this new line for the core docs
 
 theme:

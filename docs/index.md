@@ -153,6 +153,8 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
 
 *   <span id="op-rotate-gizmo">![Rotate Icon](assets/icons/Rotate.png) **Rotate**</span>: Rotates the Active gizmo 90 degrees around its local X-axis.
 
+*   <span id="op-global-align">![Global Align Icon](assets/icons/Global_Align.png) **Global Align**</span>: Resets the rotation of the Active Gizmo, aligning its local axes with the world's global X, Y, and Z axes. The gizmo's origin (location) and scale are not affected.
+
 *   <span id="op-copy" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Copy</span>: Copies the current transform components of the Active gizmo.
 
 *   <span id="op-paste" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Paste</span>: Pastes the copied transform components onto the Active gizmo. Affected components depend on the [Swap/Paste Mode Dropdown](#opt-swap-paste-mode).
@@ -303,17 +305,21 @@ After performing any transformation operation ([`Transform`](#op-transform), [`M
 
 This menu contains all the standard options from the main panel, plus several **exclusive settings** that offer even greater control.
 
-
 ### Exclusive Redo Last Settings
 
 These advanced options are **only available in the Redo Last menu**:
 
-*   <span id="redo-scale-axes">**`Individual Scale Axes (X, Y, Z)`**</span>:
-    *   **Function:** These checkboxes allow you to enable or disable scaling on individual axes *after* the operation has been performed, providing precise non-uniform scaling control.
-    *   **Availability:** These options become available when the `Scale` checkbox is active in the Redo Last menu. They are **enabled by default** when using the dedicated `Scale` or `Scale to` operators.
-    *   **Critical Behavior Difference:** The axes they affect depend on the current mode:
-        *   **In Object Mode:** Scaling is applied along the **object's own local X, Y, and Z axes**. This is standard non-uniform scaling, as an object's transform cannot be sheared directly.
-        *   **In Edit Mode:** Scaling is applied along the **gizmo's custom axes**. This allows you to directly stretch and squash the selected geometry along any arbitrary orientation. Because this manipulates vertices directly, it can produce complex deformations and targeted shape changes that are impossible to achieve in Object Mode, which would require a combination of scaling and shearing.
+*   <span id="redo-operation-type">**`Operation Type`**</span>: A dropdown menu that allows you to change the fundamental type of the transformation you just performed, without needing to undo and re-run the operator from the main panel. This is a powerful tool for quickly iterating on a transformation.
+    *   **Use Cases:**
+        *   **Switching Modes:** If you executed a full [`Transform`](#op-transform) but realize you only wanted to apply the location difference, you can select `Move` from this menu to instantly see the updated result.
+        *   **Testing Alignments:** After performing an `Align X` operation, you can use this dropdown to instantly preview the result of `Align Y` or `Align Z` to find the correct orientation without re-running the operator.
+    *   **Available Operations:**
+        *   `Transform` (Full transform)
+        *   `Move` (Location only)
+        *   `Rotate` (Rotation only)
+        *   `Scale` (Scale only)
+        *   `Align X`, `Align Y`, `Align Z` (Axis-specific alignment)
+    *   **Availability:** This menu is only available for the standard transformation operators in the [Transformation Section](#transformation-section). It will **not** appear when using [Constrained Transforms](#constrained-transforms-section), as those are interactive operations with their own distinct logic.
     
 *   <span id="opt-longest-arc">**<code>Longest Arc Path</code>**</span>: When checked, forces the underlying spiral path calculation (used for [`Interpolation`](#opt-interpolation-value) and repeated [`Count`](#opt-count) operations) to use the longer arc (>180 degrees) instead of the default shortest arc between the gizmo orientations.
     *   **Availability:** This setting only affects operations that include a rotational component (e.g., `Transform`, `Rotate`, `Align`, `Rotate to`). It has no effect and will be disabled for pure translation or scaling operations like `Move` or `Scale`.

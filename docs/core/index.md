@@ -137,7 +137,7 @@ Modify the behavior of the [`Transform`](#op-transform) operation.
 
 *   <span id="opt-reverse">**<code>Reverse</code>**</span>: *(Redo Menu Only)* Inverts the direction of the transformation. When checked, the selected elements will transform from the Active gizmo's state back to the Previous gizmo's state, effectively swapping the start and end points for the operation.
 
-*   <span id="redo-complex-dup">**`Complex Dup`**</span>: This option uses a more robust but slower duplication method. This ensures that complex relationships, such as modifiers that target other duplicated objects, are updated correctly. It is recommended to leave this behavior active for the most reliable results. However, if you are duplicating a high number of simple objects and experience a noticeable slowdown, you can deactivate this compatibility mode in the operator's Redo Last (F9) menu for a significant performance increase.
+*   <span id="redo-complex-dup">**`Complex Dup`**</span>: *(Redo Menu Only)* This option uses a more robust but slower duplication method. This ensures that complex relationships, such as modifiers that target other duplicated objects, are updated correctly. It is recommended to leave this behavior active for the most reliable results. However, if you are duplicating a high number of simple objects and experience a noticeable slowdown, you can deactivate this compatibility mode in the operator's Redo Last (F9) menu for a significant performance increase.
 
 ---
 
