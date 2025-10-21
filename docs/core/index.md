@@ -1,10 +1,10 @@
-# Transform Tools Addon - Description and Documentation
+# Transform Tools Addon - Core Version
 
 ---
 
 ## Description
 
-### Transform Tools: Advanced Gizmo Control & Precision Transformations
+### Transform Tools: Essential Gizmo Control & Precision Transformations
 
 Transform Tools enhances object manipulation in Blender using **custom 3D gizmos** for precise transformation control. It works closely with Blender's core tools.
 
@@ -28,7 +28,6 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 
 *   Transforming elements between two explicitly defined transform states using [dual gizmos](#transformation-section).
 *   Using a single gizmo as a [custom orientation](#op-cursor-pivot) for standard Blender transform tools.
-*   Executing [constrained transformations](#constrained-transforms-section), where elements move or rotate from the 3D cursor position towards a computed intersection point with target geometry (a point, line, or plane) derived from the gizmos.
 
 **Core Workflow:** The fundamental process involves:
 
@@ -41,7 +40,6 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 
 *   Gizmos definition sources: [interactive clicking](#op-create).
 *   Active gizmo can serve as a custom orientation for standard Blender tools via the [<code>Cursor Pivot</code>](#op-cursor-pivot) operator.
-*   Utilizes Blender's 3D Cursor for interactive placement and as the origin for [Constrained Transforms](#constrained-transforms-section).
 
 ### Installation
 
@@ -49,6 +47,22 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 2.  Click `Install` and select the downloaded addon `.zip` file.
 3.  Find "Transform Tools" in the list and enable the checkbox.
 4.  The panel will appear in the 3D View's Sidebar (N-Panel) under the "TTools C" tab, aka "Transform Tools Core".
+
+#### IMPORTANT NOTE: Upgrading or Installing Multiple Versions
+
+*   Please be aware that running multiple versions of the Transform Tools addon (e.g., having both "Core" and "Lite" enabled) at the same time is not recommended and may cause conflicts.
+
+*   The recommended procedure for a clean upgrade is to first **disable and REMOVE** the existing version from Blender's Add-on Preferences. **Restarting Blender** before installing the new version is also advised to ensure all modules are fully unloaded.
+
+*   Automatic Conflict Detection
+
+    To assist with this process, the addon includes a built-in conflict detection system.
+
+    If you enable a new version while an older one is still active, an **"Addon Conflict Detected"** dialog box will appear, listing the conflicting addons that were found.
+
+    *   You will be given an interactive choice:
+        *   Clicking the **"OK"** button will **automatically disable** the conflicting version(s) for you, allowing the new one to register correctly.
+        *   Clicking **"Cancel"** will abort the process, leaving the old version active and the new one disabled, allowing you to manage the conflict manually in your preferences.
 
 ---
 
