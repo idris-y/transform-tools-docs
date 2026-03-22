@@ -26,7 +26,7 @@ The addon operates by **defining the 'Previous' (start) and 'Active' (end) gizmo
 
 Transform Tools provides enhanced transformation capabilities in Blender using custom 3D gizmos and dedicated operators. It allows for precise control over moving, rotating, and scaling objects and mesh components. The addon includes methods for:
 
-*   Transforming elements between two explicitly defined transform states using [dual gizmos](#transformation-section).
+*   Transforming elements between two explicitly defined transform states using [dual gizmos](#op-create).
 *   Using a single gizmo as a [custom orientation](#op-cursor-pivot) for standard Blender transform tools.
 
 **Core Workflow:** The fundamental process involves:
@@ -99,17 +99,12 @@ The **3D Cursor** plays a vital role in [`Create`](#op-create) Gizmos operation:
     *   *Reference State for Cancellation/Auto-Creation:* The specific state used for origin cancellation revert and the orientation used for automatic axis creation depends on the [**<code>3D Cursor Orientation</code>**](#opt-cursor-orientation) setting (see description below).
     *   *Final Cursor Update:* This operation always updates the 3D cursor's location and rotation upon successful completion, regardless of other settings.
 
-*   <span id="opt-auto-update">![Auto-Update Gizmos Icon](../assets/icons/Auto-Update_Gizmos.png) **Auto-Update Gizmos**</span>: If enabled, whenever the **Active Gizmo** is defined or updated (e.g., via [`Create`](#op-create), [`Get from selected`](#op-get-from-selected), [`Paste`](#op-paste)), the **Previous Gizmo** automatically takes the state of the **former Active Gizmo**. This ensures the two gizmos usually represent the 'before' and 'after' states of the last operation.
-    *   *Note:* This setting is overridden and has no effect when using [`Get from selected`](#op-get-from-selected) with exactly 2 objects, as both gizmos are defined directly from the selected objects in that specific case.
+*   <span id="opt-auto-update">![Auto-Update Gizmos Icon](../assets/icons/Auto-Update_Gizmos.png) **Auto-Update Gizmos**</span>: If enabled, whenever the **Active Gizmo** is defined or updated (e.g., via [`Create`](#op-create)), the **Previous Gizmo** automatically takes the state of the **former Active Gizmo**. This ensures the two gizmos usually represent the 'before' and 'after' states of the last operation.
 
 *   <span id="opt-cursor-orientation">![3D Cursor Orientation Icon](../assets/icons/3D_Cursor_Orientation.png) **3D Cursor Orientation**</span>: This option primarily controls the reference **orientation and scale** used by the interactive [`Create`](#op-create) operation when handling origin cancellation or performing automatic axis creation/alignment. The new gizmo's **origin location** will always be based on the 3D Cursor's current location if origin placement is cancelled.
     1.  *Primary Effect (Reference for <code>Create</code>'s Orientation & Scale during Auto-Creation/Cancellation):*
         *   **When Enabled:** If an axis needs to be auto-created or cancelled, the [`Create`](#op-create) operation uses the current **3D Cursor's orientation** and derives a **scale factor from the screen space zoom level** as the reference.
         *   **When Disabled:** If an axis needs to be auto-created or cancelled, the [`Create`](#op-create) operation uses the **orientation and scale** from the **former Active Gizmo** (the one active before [`Create`](#op-create) began) as the reference.
-    2.  *Secondary Effect (Updating the 3D Cursor by other operations):*
-        *   **When Enabled:** Allows certain other addon operations (like [`Get from selected`](#op-get-from-selected)) to update the 3D cursor's location and rotation.
-        *   **When Disabled:** These other addon operations will not automatically update the 3D cursor.
-        *   *(Note: The interactive [`Create`](#op-create) operation *always* updates the 3D cursor's location and rotation upon successful completion, regardless of this setting).*
 
 *   <span id="opt-snap">![Snap Icon](../assets/icons/Snap.png) **Snap**</span>: When enabled, this forces the interactive [`Create`](#op-create) operation to use a specific, pre-defined set of snapping settings, **overriding** whatever snapping settings are currently active in Blender's 3D View header. When disabled, [`Create`](#op-create) respects Blender's current header snapping settings.
     *   *Addon's Internal Snap Behavior (When this toggle is ON):*
@@ -137,7 +132,7 @@ The **3D Cursor** plays a vital role in [`Create`](#op-create) Gizmos operation:
 
 Modify the behavior of the [`Transform`](#op-transform) operation.
 
-*   <span id="opt-scale">**<code>Scale</code>**</span>: Include the uniform scale factor difference between the gizmos in the transformation calculations for operations in the [Transformation Section](#transformation-section). If unchecked, the scale component of the gizmos is ignored, and only location and rotation differences are applied.
+*   <span id="opt-scale">**<code>Scale</code>**</span>: Include the uniform scale factor difference between the gizmos in the transformation calculations. If unchecked, the scale component of the gizmos is ignored, and only location and rotation differences are applied.
 *   ***Note on Scale:*** Whether the scale component of the gizmos is included in the <code>Transform</code> operation depends on the state of the [<code>Scale</code>](#opt-scale) checkbox in the [Options Section](#options-section).
 
 *   <span id="opt-flip">**<code>Flip</code>**</span>: Rotates the Previous gizmo 180 degrees around its Y-axis before applying the transformation. Primarily used when transforming between two faces (e.g., on different objects) that should end up facing each other, rather than aligned in the same direction.
