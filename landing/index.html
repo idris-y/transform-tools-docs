@@ -1,10 +1,10 @@
+--- START OF FILE index.html ---
 <!DOCTYPE html>
 <html class="dark scroll-smooth" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Transform Tools for Blender - Advanced Gizmo Control</title>
-    <!-- Imported Inter for body/data, and Archivo for serious, heavy technical headlines -->
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -87,77 +87,65 @@
 <body class="antialiased selection:bg-primary selection:text-on-primary">
 
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-[#131313]/95 border-b border-outline-variant/20 flex justify-between items-center px-8 py-4 max-w-full mx-auto">
-        
-        <!-- Logo (Left) -->
-        <div class="text-xl font-headline font-bold tracking-tighter text-[#ffffff] uppercase relative z-10 w-48">
+    <nav class="fixed top-0 w-full z-50 bg-[#131313]/95 border-b border-outline-variant/20 flex justify-between items-center px-6 md:px-8 py-4 max-w-full mx-auto">
+        <div class="text-lg md:text-xl font-headline font-bold tracking-tighter text-[#ffffff] uppercase relative z-10 w-48">
             Transform Tools
         </div>
-        
-        <!-- Navigation Links (Perfectly Centered) -->
         <div class="hidden md:flex items-center justify-center gap-8 absolute left-1/2 -translate-x-1/2">
             <a class="font-['Inter'] antialiased tracking-tight text-sm uppercase font-medium text-[#a3a3a3] hover:text-[#ffffff] transition-colors duration-200" href="#features">Features</a>
             <a class="font-['Inter'] antialiased tracking-tight text-sm uppercase font-medium text-[#a3a3a3] hover:text-[#ffffff] transition-colors duration-200" href="#get">Get</a>
             <a class="font-['Inter'] antialiased tracking-tight text-sm uppercase font-medium text-[#a3a3a3] hover:text-[#ffffff] transition-colors duration-200" href="#docs">Docs</a>
         </div>
-
-        <!-- Spacer to balance the flex layout -->
         <div class="w-48 hidden md:block"></div>
     </nav>
 
-    <main class="pt-24 pb-8 bg-background">
+    <main class="pt-20 md:pt-24 pb-8 bg-background">
         
-        <!-- Section 1: Hero (2:1 Ratio, Stacked Content) -->
+        <!-- Section 1: Hero -->
         <section class="px-4 md:px-8 w-full max-w-7xl mx-auto">
-            <!-- 2:1 Container with padding so content never touches edges -->
-            <div class="relative w-full aspect-[2/1] min-h-[450px] bg-surface-container border border-outline-variant/30 flex flex-col justify-center items-start p-6 md:p-12 overflow-hidden">
-                
-                <!-- Background Video & Transparency Overlay -->
+            <div class="relative w-full aspect-[3/4] md:aspect-[2/1] min-h-[500px] md:min-h-[450px] bg-surface-container border border-outline-variant/30 flex flex-col justify-center items-start p-6 md:p-12 overflow-hidden">
                 <div class="absolute inset-0 z-0">
                     <video autoplay loop muted playsinline class="w-full h-full object-cover">
                         <source src="assets/hero-demo.webm" type="video/webm">
                     </video>
-                    <!-- Transparency Overlay to make text legible -->
-                    <div class="absolute inset-0 bg-[#0a0a0a]/60 mix-blend-multiply"></div>
+                    <div class="absolute inset-0 bg-[#0a0a0a]/70 md:bg-[#0a0a0a]/60 mix-blend-multiply"></div>
                 </div>
 
-                <!-- Content Wrapper (Title + Black Box) -->
                 <div class="relative z-10 flex flex-col gap-6 w-full max-w-3xl">
-                    
-                    <!-- Top Area: Floating Title Text -->
                     <div>
                         <div class="inline-block bg-surface-container-highest px-3 py-1 mb-4 border border-outline-variant/30 shadow-lg">
-                            <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-primary">Advanced Gizmo Logic</span>
+                            <span class="font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-primary">Advanced Gizmo Logic</span>
                         </div>
-                        <h1 class="font-headline text-4xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-tight uppercase text-primary drop-shadow-md">
+                        <h1 class="font-headline text-3xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-tight uppercase text-primary drop-shadow-md">
                             Precision, Speed, <br/>
                             And Control. <br/>
                         </h1>
                     </div>
 
-                    <!-- Bottom Area: Black Box (Restricted width to align perfectly with Title) -->
                     <div class="bg-[#0a0a0a] border border-outline-variant/30 p-6 md:p-8 max-w-[480px] shadow-2xl flex flex-col items-start gap-6">
-                        <p class="text-on-surface-variant font-medium leading-relaxed text-sm md:text-base font-mono">
+                        <p class="text-on-surface-variant font-medium leading-relaxed text-xs md:text-base font-mono">
                             Enhance your Blender workflow with custom 3D gizmos. Define start and end states to execute complex pose-to-pose adjustments and constrained alignments in seconds.
                         </p>
-                        
-                        <button onclick="document.getElementById('get').scrollIntoView({behavior: 'smooth'})" class="bg-primary text-on-primary px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+                        <button onclick="document.getElementById('get').scrollIntoView({behavior: 'smooth'})" class="w-full md:w-auto bg-primary text-on-primary px-8 py-4 font-bold uppercase text-[10px] md:text-xs tracking-widest hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
                             Get Transform Tools
                             <span class="material-symbols-outlined text-[16px]">south</span>
                         </button>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Features (The Dual-Gizmo Workflow) -->
-        <section id="features" class="py-32 px-8 bg-background">
+        <!-- Section 2: Features -->
+        <section id="features" class="py-20 md:py-32 px-6 md:px-8 bg-background">
             <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-baseline mb-24 gap-8">
-                    <h2 class="font-headline text-5xl font-bold tracking-tighter uppercase leading-none text-primary">The Dual-Gizmo<br/>Workflow</h2>
-                    <div class="max-w-3xl">
-                        <p class="text-on-surface-variant text-sm leading-relaxed font-mono">
+                <div class="flex flex-col md:flex-row justify-between items-baseline mb-16 md:mb-24 gap-8">
+                    <!-- Dual-Gizmo compressed: "The Dual-" stays together -->
+                    <h2 class="font-headline text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-[0.9] text-primary">
+                        <span class="inline-block">The Dual-</span><br>Gizmo<br class="hidden md:block">Workflow
+                    </h2>
+                    <div class="max-w-2xl">
+                        <!-- Small text compressed using max-w on mobile -->
+                        <p class="text-on-surface-variant text-[11px] md:text-sm leading-relaxed font-mono max-w-[280px] md:max-w-none">
                             Transform Tools is built to give you exact mathematical control over how your elements move, rotate, and scale.
                             By acting as a seamless data bridge, it allows you to effortlessly push and pull precise orientations between your Objects,
                             custom Gizmos, and Blender's 3D Cursor.
@@ -166,260 +154,204 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    
-                    <!-- Feature Card 1 -->
+                    <!-- Feature Cards -->
                     <div class="relative flex flex-col justify-between aspect-square group border border-outline-variant/30 overflow-hidden">
-                        <!-- Background Video -->
                         <div class="absolute inset-0 z-0">
                             <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 <source src="assets/workflow-1.webm" type="video/webm">
                             </video>
                             <div class="absolute inset-0 bg-[#0a0a0a]/70 mix-blend-multiply transition-colors duration-500 group-hover:bg-[#0a0a0a]/50"></div>
                         </div>
-                        
-                        <!-- Content Overlay -->
                         <div class="relative z-10 p-6 flex flex-col justify-between h-full">
-                            <!-- Floating Title -->
                             <div>
-                                <span class="font-mono text-[10px] text-primary mb-4 block uppercase tracking-[0.2em] drop-shadow-md">01 / Define Previous</span>
-                                <h3 class="font-headline text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Initial<br/>State</h3>
+                                <span class="font-mono text-[10px] text-primary mb-2 block uppercase tracking-[0.2em] drop-shadow-md">01 / Define Previous</span>
+                                <h3 class="font-headline text-2xl md:text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Initial<br/>State</h3>
                             </div>
-                            
-                            <!-- Black Box Description -->
-                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-5 shadow-2xl">
-                                <p class="text-on-surface-variant text-xs md:text-sm font-mono leading-relaxed">
+                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-4 shadow-2xl">
+                                <p class="text-on-surface-variant text-[11px] md:text-sm font-mono leading-relaxed">
                                     Set the initial state by clicking, using the 3D cursor, or automatically generating a gizmo from your selected mesh data.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Feature Card 2 -->
                     <div class="relative flex flex-col justify-between aspect-square group border border-outline-variant/30 overflow-hidden">
-                        <!-- Background Video -->
                         <div class="absolute inset-0 z-0">
                             <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 <source src="assets/workflow-2.webm" type="video/webm">
                             </video>
                             <div class="absolute inset-0 bg-[#0a0a0a]/70 mix-blend-multiply transition-colors duration-500 group-hover:bg-[#0a0a0a]/50"></div>
                         </div>
-                        
-                        <!-- Content Overlay -->
                         <div class="relative z-10 p-6 flex flex-col justify-between h-full">
-                            <!-- Floating Title -->
                             <div>
-                                <span class="font-mono text-[10px] text-primary mb-4 block uppercase tracking-[0.2em] drop-shadow-md">02 / Define Active</span>
-                                <h3 class="font-headline text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Target<br/>Destination</h3>
+                                <span class="font-mono text-[10px] text-primary mb-2 block uppercase tracking-[0.2em] drop-shadow-md">02 / Define Active</span>
+                                <h3 class="font-headline text-2xl md:text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Target<br/>Destination</h3>
                             </div>
-                            
-                            <!-- Black Box Description -->
-                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-5 shadow-2xl">
-                                <p class="text-on-surface-variant text-xs md:text-sm font-mono leading-relaxed">
+                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-4 shadow-2xl">
+                                <p class="text-on-surface-variant text-[11px] md:text-sm font-mono leading-relaxed">
                                     Set the target destination and orientation. Transform Tools calculates the exact spatial difference between the two gizmos.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Feature Card 3 -->
                     <div class="relative flex flex-col justify-between aspect-square group border border-outline-variant/30 overflow-hidden">
-                        <!-- Background Video -->
                         <div class="absolute inset-0 z-0">
                             <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 <source src="assets/workflow-3.webm" type="video/webm">
                             </video>
                             <div class="absolute inset-0 bg-[#0a0a0a]/70 mix-blend-multiply transition-colors duration-500 group-hover:bg-[#0a0a0a]/50"></div>
                         </div>
-                        
-                        <!-- Content Overlay -->
                         <div class="relative z-10 p-6 flex flex-col justify-between h-full">
-                            <!-- Floating Title -->
                             <div>
-                                <span class="font-mono text-[10px] text-primary mb-4 block uppercase tracking-[0.2em] drop-shadow-md">03 / Execute</span>
-                                <h3 class="font-headline text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Perfect<br/>Alignment</h3>
+                                <span class="font-mono text-[10px] text-primary mb-2 block uppercase tracking-[0.2em] drop-shadow-md">03 / Execute</span>
+                                <h3 class="font-headline text-2xl md:text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Perfect<br/>Alignment</h3>
                             </div>
-                            
-                            <!-- Black Box Description -->
-                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-5 shadow-2xl">
-                                <p class="text-on-surface-variant text-xs md:text-sm font-mono leading-relaxed">
+                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-4 shadow-2xl">
+                                <p class="text-on-surface-variant text-[11px] md:text-sm font-mono leading-relaxed">
                                     Instantly transform, move, rotate, or perfectly align your selection from the Previous state to the Active state.
                                 </p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
         <!-- Section 3: Get Table -->
-        <section id="get" class="py-24 px-8 bg-surface border-y border-outline-variant/20">
+        <section id="get" class="py-20 md:py-24 px-4 md:px-8 bg-surface border-y border-outline-variant/20">
             <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-24">
-                    <h2 class="font-headline text-4xl font-bold tracking-tighter uppercase mb-4 text-primary">Get Transform Tools</h2>
+                <div class="text-center mb-16 md:mb-24">
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter uppercase mb-4 text-primary">Get Transform Tools</h2>
                     <p class="font-mono text-[10px] tracking-widest text-outline uppercase">Select your version</p>
                 </div>
 
-                <!-- Table Container -->
-                <div class="w-full border border-outline-variant/20 bg-surface-container-lowest p-1 mb-16">
+                <!-- Table Container: grid ratio adjusted to 1.2fr to shrink Capability column -->
+                <div class="w-full border border-outline-variant/20 bg-surface-container-lowest p-0.5 md:p-1 mb-16">
                     <!-- Table Header -->
-                    <div class="grid grid-cols-3 border-b border-outline-variant/30 pb-6 pt-6 px-4 bg-surface">
-                        <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-outline">Capability</div>
-                        <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-center text-outline">Core Version</div>
-                        <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-center text-primary font-bold">Full Version</div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] md:grid-cols-[2fr_1fr_1fr] border-b border-outline-variant/30 pb-6 pt-6 px-3 md:px-4 bg-surface">
+                        <div class="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.1em] text-outline">Capability</div>
+                        <div class="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.1em] text-center text-outline">Core</div>
+                        <div class="text-[9px] md:text-[10px] font-mono uppercase tracking-[0.1em] text-center text-primary font-bold">Full</div>
                     </div>
 
-                    <!-- Row 1 -->
-                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
-                        <div class="text-sm font-bold uppercase text-primary pr-2">All Gizmo Definition Features</div>
-                        <div class="text-center"><span class="material-symbols-outlined text-outline">check</span></div>
-                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    <!-- Rows -->
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] md:grid-cols-[2fr_1fr_1fr] py-4 md:py-6 px-3 md:px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-[11px] md:text-sm font-bold uppercase text-primary pr-2 leading-tight">Gizmo Logic</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline text-xl">check</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary text-xl">check</span></div>
                     </div>
 
-                    <!-- Row 2 -->
-                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
-                        <div class="text-sm font-bold uppercase text-primary pr-2">Core "Transform" Operator</div>
-                        <div class="text-center"><span class="material-symbols-outlined text-outline">check</span></div>
-                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] md:grid-cols-[2fr_1fr_1fr] py-4 md:py-6 px-3 md:px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-[11px] md:text-sm font-bold uppercase text-primary pr-2 leading-tight">Transform</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline text-xl">check</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary text-xl">check</span></div>
                     </div>
 
-                    <!-- Row 3 -->
-                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
-                        <div class="text-sm font-bold uppercase text-primary pr-2">Specific: Align, Move, Rotate, Scale</div>
-                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
-                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] md:grid-cols-[2fr_1fr_1fr] py-4 md:py-6 px-3 md:px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-[11px] md:text-sm font-bold uppercase text-primary pr-2 leading-tight">Move/Rot/Align</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant text-xl">close</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary text-xl">check</span></div>
                     </div>
 
-                    <!-- Row 4 -->
-                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
-                        <div class="text-sm font-bold uppercase text-primary pr-2">Constrained Target Transforms</div>
-                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
-                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    <div class="grid grid-cols-[1.2fr_1fr_1fr] md:grid-cols-[2fr_1fr_1fr] py-4 md:py-6 px-3 md:px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-[11px] md:text-sm font-bold uppercase text-primary pr-2 leading-tight">Arrays</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant text-xl">close</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary text-xl">check</span></div>
                     </div>
 
-                    <!-- Row 5 -->
-                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
-                        <div class="text-sm font-bold uppercase text-primary pr-2">Multi-Transform Arrays (Chains)</div>
-                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
-                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
-                    </div>
-
-                    <!-- Row 6 -->
-                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/20">
-                        <div class="text-sm font-bold uppercase text-primary pr-2">Advanced Redo & Custom Skips</div>
-                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
-                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
-                    </div>
-
-                    <!-- Action Buttons Aligned to Grid -->
-                    <div class="grid grid-cols-3 py-10 px-4 bg-surface items-start">
-                        <!-- Empty Cell 1 to maintain grid alignment -->
-                        <div></div>
+                    <!-- Action Buttons Row: Spacer column is tiny (0.2fr) to give buttons maximum room -->
+                    <div class="grid grid-cols-[0.2fr_1fr_1fr] md:grid-cols-[2fr_1fr_1fr] py-10 px-2 md:px-4 bg-surface items-start">
+                        <!-- Spacer (shrinks on mobile) -->
+                        <div class="block"></div>
                         
-                        <!-- Core Actions (Aligned under Core Version) -->
-                        <div class="flex flex-col items-center justify-start relative px-2 dropdown-container">
-                            <span class="font-headline text-2xl font-bold mb-4 text-outline">FREE</span>
-                            <button onclick="toggleMenu('table-core-dropdown', event)" class="w-full border border-outline-variant text-primary text-[10px] py-4 uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex justify-center items-center gap-2">
-                                Download Core <span class="material-symbols-outlined text-[14px] pointer-events-none">expand_more</span>
+                        <!-- Core Version Button -->
+                        <div class="flex flex-col items-center justify-start relative px-1 dropdown-container">
+                            <span class="font-headline text-lg md:text-2xl font-bold mb-4 text-outline">FREE</span>
+                            <button onclick="toggleMenu('table-core-dropdown', event)" class="w-full border border-outline-variant text-primary text-[9px] md:text-[10px] py-4 px-1 uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex justify-center items-center gap-1">
+                                <span class="hidden sm:inline">Download</span> Core <span class="material-symbols-outlined text-[14px] pointer-events-none">expand_more</span>
                             </button>
-                            <!-- Dropdown Menu opening DOWN -->
                             <div id="table-core-dropdown" class="dropdown-menu hidden absolute top-full mt-2 w-full bg-surface-container-high border border-outline-variant/40 shadow-2xl z-20">
-                                <a href="https://extensions.blender.org/add-ons/" target="_blank" class="block px-4 py-4 text-center border-b border-outline-variant/20 hover:bg-surface-container-highest transition-colors">
-                                    <span class="font-bold block text-primary text-xs uppercase tracking-wider">Blender Extensions</span>
+                                <a href="https://extensions.blender.org/add-ons" target="_blank" class="block px-2 py-4 text-center border-b border-outline-variant/20 hover:bg-surface-container-highest transition-colors">
+                                    <span class="font-bold block text-primary text-[10px] uppercase">Blender</span>
                                 </a>
-                                <a href="https://github.com/idris-y/transform_tools_core/releases/latest" target="_blank" class="block px-4 py-4 text-center hover:bg-surface-container-highest transition-colors">
-                                    <span class="font-bold block text-primary text-xs uppercase tracking-wider">GitHub Release</span>
+                                <a href="https://github.com/idris-y/transform_tools_core/releases/latest" target="_blank" class="block px-2 py-4 text-center hover:bg-surface-container-highest transition-colors">
+                                    <span class="font-bold block text-primary text-[10px] uppercase">GitHub</span>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Full Actions (Aligned under Full Version) -->
-                        <div class="flex flex-col items-center justify-start relative px-2 dropdown-container">
-                            <span class="font-headline text-2xl font-bold mb-4 text-primary">ALL FEATURES</span>
-                            <button onclick="toggleMenu('table-full-dropdown', event)" class="w-full bg-primary text-on-primary text-[10px] py-4 uppercase tracking-widest font-bold hover:bg-primary-container transition-colors flex justify-center items-center gap-2">
-                                Get Full Version <span class="material-symbols-outlined text-[14px] pointer-events-none">expand_more</span>
+                        <!-- Full Version Button -->
+                        <div class="flex flex-col items-center justify-start relative px-1 dropdown-container">
+                            <span class="font-headline text-lg md:text-2xl font-bold mb-4 text-primary">FULL</span>
+                            <button onclick="toggleMenu('table-full-dropdown', event)" class="w-full bg-primary text-on-primary text-[9px] md:text-[10px] py-4 px-1 uppercase tracking-widest font-bold hover:bg-primary-container transition-colors flex justify-center items-center gap-1">
+                                Get <span class="hidden sm:inline">Full</span> Version <span class="material-symbols-outlined text-[14px] pointer-events-none">expand_more</span>
                             </button>
-                            <!-- Dropdown Menu opening DOWN -->
                             <div id="table-full-dropdown" class="dropdown-menu hidden absolute top-full mt-2 w-full bg-surface-container-high border border-outline-variant/40 shadow-2xl z-20">
-                                <a href="https://idrisy.gumroad.com/l/transformtools" target="_blank" class="flex justify-between items-center px-4 py-4 border-b border-outline-variant/20 hover:bg-surface-container-highest transition-colors">
-                                    <span class="font-bold text-primary text-xs uppercase tracking-wider">Gumroad</span>
-                                    <span class="font-mono text-primary font-bold text-xs">$12</span>
+                                <a href="https://idrisy.gumroad.com/l/transformtools" target="_blank" class="flex flex-col md:flex-row md:justify-between items-center px-2 py-4 border-b border-outline-variant/20 hover:bg-surface-container-highest transition-colors gap-1">
+                                    <span class="font-bold text-primary text-[10px] uppercase">Gumroad</span>
+                                    <span class="font-mono text-primary font-bold text-[10px]">$12</span>
                                 </a>
-                                <a href="https://superhivemarket.com/products/transform-tools" target="_blank" class="flex justify-between items-center px-4 py-4 hover:bg-surface-container-highest transition-colors">
-                                    <span class="font-bold text-primary text-xs uppercase tracking-wider">Superhive</span>
-                                    <span class="font-mono text-primary font-bold text-xs">$15</span>
+                                <a href="https://superhivemarket.com/products/transform-tools" target="_blank" class="flex flex-col md:flex-row md:justify-between items-center px-2 py-4 hover:bg-surface-container-highest transition-colors gap-1">
+                                    <span class="font-bold text-primary text-[10px] uppercase">Superhive</span>
+                                    <span class="font-mono text-primary font-bold text-[10px]">$15</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- Section 4: Documentation -->
-        <section id="docs" class="py-24 px-8 bg-background border-b border-outline-variant/20">
+        <!-- Documentation -->
+        <section id="docs" class="py-24 px-6 md:px-8 bg-background border-b border-outline-variant/20">
             <div class="max-w-4xl mx-auto text-center">
-                <div class="w-16 h-16 border border-outline-variant/40 flex items-center justify-center bg-surface mx-auto mb-6">
-                    <span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+                <div class="w-14 h-14 md:w-16 md:h-16 border border-outline-variant/40 flex items-center justify-center bg-surface mx-auto mb-6">
+                    <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">menu_book</span>
                 </div>
-                <h2 class="font-headline text-3xl font-bold tracking-tighter uppercase mb-4 text-primary">Technical Documentation</h2>
-                <p class="text-sm text-outline font-mono uppercase leading-relaxed tracking-wider mb-10 max-w-xl mx-auto">
-                    Comprehensive manuals covering every operator, hotkey, and architectural logic. Select your engine version to proceed.
+                <h2 class="font-headline text-2xl md:text-3xl font-bold tracking-tighter uppercase mb-4 text-primary">Technical Documentation</h2>
+                <p class="text-[11px] md:text-sm text-outline font-mono uppercase leading-relaxed tracking-wider mb-10 max-w-xl mx-auto">
+                    Comprehensive manuals covering every operator, hotkey, and architectural logic.
                 </p>
-                
-                <div class="flex flex-col sm:flex-row justify-center gap-6">
-                    <!-- Core Docs Button -->
-                    <a href="https://idris-y.github.io/transform-tools-docs/core/" target="_blank" class="border border-outline-variant text-primary px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+                <div class="flex flex-col sm:flex-row justify-center gap-4 md:gap-6">
+                    <a href="https://idris-y.github.io/transform-tools-docs/core" target="_blank" class="border border-outline-variant text-primary px-8 py-4 font-bold uppercase text-[10px] tracking-widest hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
                         Core Docs
                         <span class="material-symbols-outlined text-[16px]">open_in_new</span>
                     </a>
-                    <!-- Full Docs Button -->
-                    <a href="https://idris-y.github.io/transform-tools-docs/" target="_blank" class="bg-surface-container-highest border border-outline-variant/40 text-primary px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-surface-container-lowest transition-colors flex items-center justify-center gap-2">
+                    <a href="https://idris-y.github.io/transform-tools-docs" target="_blank" class="bg-surface-container-highest border border-outline-variant/40 text-primary px-8 py-4 font-bold uppercase text-[10px] tracking-widest hover:bg-surface-container-lowest transition-colors flex items-center justify-center gap-2">
                         Full Version Docs
                         <span class="material-symbols-outlined text-[16px]">open_in_new</span>
                     </a>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="w-full bg-[#0a0a0a] flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-6">
+    <footer class="w-full bg-[#0a0a0a] flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-10">
         <div class="text-sm font-headline font-bold text-primary tracking-widest uppercase">Transform Tools</div>
-        <div class="flex gap-8">
-            <a class="font-['Inter'] text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="mailto:idris.vy@gmail.com">Contact Developer</a>
-            <a class="font-['Inter'] text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="https://idris-y.github.io/transform-tools-docs/" target="_blank">Documentation</a>
-            <a class="font-['Inter'] text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="https://github.com/idris-y/transform-tools" target="_blank">GitHub Source</a>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+            <a class="font-['Inter'] text-[9px] md:text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="mailto:idris.vy@gmail.com">Contact</a>
+            <a class="font-['Inter'] text-[9px] md:text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="https://idris-y.github.io/transform-tools-docs/" target="_blank">Docs</a>
+            <a class="font-['Inter'] text-[9px] md:text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="https://github.com/idris-y/transform-tools" target="_blank">GitHub</a>
         </div>
-        <div class="font-mono text-[10px] tracking-[0.05em] uppercase text-outline">
-            © 2026 YASSER IDRIS. ALL RIGHTS RESERVED.
+        <div class="font-mono text-[9px] md:text-[10px] tracking-[0.05em] uppercase text-outline text-center">
+            © 2026 YASSER IDRIS.
         </div>
     </footer>
 
-    <!-- Robust Dropdown Script -->
     <script>
-        // Function to toggle specific menu
         function toggleMenu(id, event) {
-            // Stop document click from instantly closing it
             event.stopPropagation();
-            
             const targetMenu = document.getElementById(id);
             const isCurrentlyHidden = targetMenu.classList.contains('hidden');
-            
-            // First, close all dropdown menus
             document.querySelectorAll('.dropdown-menu').forEach(menu => {
                 menu.classList.add('hidden');
             });
-            
-            // If the menu we clicked was hidden, open it
             if (isCurrentlyHidden) {
                 targetMenu.classList.remove('hidden');
             }
         }
-
-        // Click anywhere on the page to close open menus
         document.addEventListener('click', function() {
             document.querySelectorAll('.dropdown-menu').forEach(menu => {
                 menu.classList.add('hidden');
