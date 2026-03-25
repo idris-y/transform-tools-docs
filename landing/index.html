@@ -1,564 +1,428 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark scroll-smooth" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transform Tools - Blender Addon by Yasser Idris</title>
-    <meta name="description" content="Elevate your Blender workflow with Transform Tools: precise snapping, interactive alignment, powerful gizmos, and more. Free Lite & Full versions available">
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Transform Tools - Advanced Blender Addon by Idris Y">
-    <meta property="og:description" content="Precision, Speed, and Control for Your 3D Transformations in Blender">
-    <meta property="og:image" content="assets/images/transform-tools-lite-vs-full.png">
-    <meta property="og:url" content="https://idris-y.github.io/transform-tools/">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- FAVICONS -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-
-
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Transform Tools for Blender - Advanced Gizmo Control</title>
+    <!-- Imported Inter for body/data, and Archivo for serious, heavy technical headlines -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#e2e2e2",
+                        "on-tertiary-container": "#000000",
+                        "secondary-container": "#474746",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#1b1c1c",
+                        "primary-container": "#d4d4d4",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#ffffff",
+                        "on-primary": "#1a1c1c",
+                        "primary-fixed": "#5d5f5f",
+                        "primary": "#ffffff",
+                        "tertiary-fixed": "#5f5e5e",
+                        "inverse-on-surface": "#303030",
+                        "tertiary-container": "#919090",
+                        "surface-tint": "#c6c6c7",
+                        "inverse-surface": "#e2e2e2",
+                        "inverse-primary": "#5d5f5f",
+                        "tertiary": "#e4e2e1",
+                        "on-primary-container": "#000000",
+                        "secondary-fixed-dim": "#adabaa",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "surface": "#131313",
+                        "on-primary-fixed": "#ffffff",
+                        "secondary": "#c8c6c5",
+                        "on-surface-variant": "#c6c6c6",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#393939",
+                        "surface-variant": "#353535",
+                        "on-secondary-container": "#e5e2e1",
+                        "primary-fixed-dim": "#454747",
+                        "outline": "#919191",
+                        "background": "#131313",
+                        "on-tertiary-fixed-variant": "#e4e2e1",
+                        "surface-dim": "#131313",
+                        "on-background": "#e2e2e2",
+                        "outline-variant": "#474747",
+                        "on-secondary": "#1b1c1c",
+                        "secondary-fixed": "#c8c6c5",
+                        "on-secondary-fixed-variant": "#3c3b3b",
+                        "tertiary-fixed-dim": "#474747",
+                        "surface-container-low": "#1b1b1b",
+                        "surface-container": "#1f1f1f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-container-highest": "#353535",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab"
+                    },
+                    fontFamily: {
+                        "headline": ["Archivo", "sans-serif"],
+                        "body":["Inter", "sans-serif"],
+                        "label":["Inter", "sans-serif"],
+                        "mono":["monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
     <style>
-        /* === CSS RESET & GLOBAL === */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            line-height: 1.6;
-            color: #e0e0e0;
-            background-color: #2d2d2d;
+            background-color: #131313;
+            color: #e2e2e2;
+            font-family: 'Inter', sans-serif;
         }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* === BUTTONS (BASE STYLES) === */
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            border: 1px solid transparent;
-            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-            font-size: 1rem;
-            text-align: center;
-            cursor: pointer;
-            line-height: 1.4;
-        }
-
-        .button.primary {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        .button.primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-        }
-
-        .button.secondary {
-            background-color: #5a6268;
-            color: #f8f9fa;
-            border-color: #5a6268;
-        }
-        .button.secondary:hover {
-            background-color: #495057;
-            border-color: #495057;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-        }
-
-        .button.green {
-            background-color: #28a745;
-            color: white;
-            border-color: #28a745;
-        }
-        .button.green:hover {
-            background-color: #1e7e34;
-            border-color: #1e7e34;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-        }
-
-        /* === HERO SECTION === */
-        .hero {
-            text-align: center;
-            padding-top: 50px;
-        }
-
-        .hero-text-content-top {
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 40px;
-            padding: 0 20px;
-        }
-        .hero-text-content-top h1 {
-            font-size: clamp(2em, 5vw, 3.2em);
-            color: #ffffff;
-            margin-bottom: 0.5em;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-        .hero-text-content-top .subtitle { /* This is the style we're matching */
-            font-size: clamp(1em, 2.5vw, 1.4em);
-            color: #c0c0c0;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* New style for the hero documentation link */
-        .hero-docs-link-top {
-            margin-top: 1em; /* Space from subtitle */
-            margin-bottom: 1em; /* Adjusted to align with the overall spacing rhythm */
-            font-size: clamp(0.9em, 1.8vw, 1.1em);
-            text-align: center;
-        }
-        .hero-docs-link-top a {
-            color: #8ab4f8; /* A softer, distinct link color */
-            text-decoration: none;
-            font-weight: 500;
-            padding: 6px 10px;
-            border-radius: 4px;
-            border: 1px solid transparent; /* For hover effect consistency */
-            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        .hero-docs-link-top a:hover {
-            color: #a3c5f9;
-            background-color: rgba(138, 180, 248, 0.1); /* Subtle hover background */
-            border-color: rgba(138, 180, 248, 0.3);
-            text-decoration: none; /* Keep no underline on hover */
-        }
-
-
-        .hero-image-and-button-wrapper {
-            position: relative;
-            width: 100%;
-            line-height: 0;
-            margin-bottom: 60px;
-        }
-        .hero-image {
-            width: 100%;
-        }
-
-        .hero-cta-buttons-wrapper {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            transform: translateY(50%);
-            z-index: 5;
-            padding: 0 5%;
-            opacity: 1;
-            transition: transform 0.3s ease-out, bottom 0.3s ease-out, top 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        .hero-cta-buttons-wrapper.is-viewport-stuck {
-            position: fixed !important;
-            bottom: 20px !important;
-            top: auto !important;
-            transform: translateY(0) !important;
-            z-index: 999;
-            opacity: 1;
-        }
-        .hero-cta-buttons-wrapper.is-pinned-top {
-            position: absolute !important;
-            top: 0px !important;
-            bottom: auto !important;
-            transform: translateY(-50%) !important;
-            opacity: 1;
-        }
-
-        .hero-cta-button-container {
-            flex-grow: 0;
-            flex-shrink: 1;
-            width: 30vw;
-            max-width: 350px;
-            min-width: 220px;
-            margin: 0 auto;
-        }
-
-        .hero-main-button {
-            display: block;
-            width: 100%;
-            padding: 18px 15px;
-            font-size: clamp(1em, 1.9vw, 1.2em);
-            line-height: 1.4;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.35);
-            margin: 0;
-        }
-
-        /* === GENERAL CONTENT WRAPPER & PARAGRAPH STYLES === */
-        .content-wrapper {
-            max-width: 960px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 60px 20px;
-        }
-        .content-wrapper h2 {
-            text-align: center;
-            font-size: clamp(1.8em, 4vw, 2.5em);
-            margin-bottom: 1em;
-            color: #f0f0f0;
-        }
-        .content-wrapper p { /* Default paragraph style */
-            margin-bottom: 1em;
-            color: #d0d0d0;
-            /* text-align: left; by default */
-        }
-
-        /* REUSABLE STYLED PARAGRAPH (Matches hero subtitle) */
-        .styled-intro-paragraph {
-            font-size: clamp(1em, 2.5vw, 1.4em);
-            color: #c0c0c0;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1.5em; /* More spacing for these prominent paragraphs */
-            text-align: center;
-        }
-
-
-        /* === VERSIONS SECTION === */
-        .section-versions {
-            background-color: #252525;
-            padding-top: 1px;
-            padding-bottom: 30px;
-        }
-
-        .version-comparison {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .version-card {
-            border: 2px solid #4a4a4a;
-            padding: 25px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 380px;
-            background-color: #383838;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            transition: border-color 0.3s ease-out, transform 0.3s ease-out, box-shadow 0.3s ease-out;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .version-card.card-highlighted {
-            border-color: #00ffaa;
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
-        }
-
-        .version-card .card-header h3 {
-            font-size: 1.7em;
-            color: #ffffff;
-            margin-bottom: 0.5em;
-        }
-        .version-card .card-header .price {
-            font-size: 2.2em;
-            font-weight: bold;
-            margin-bottom: 1em;
-        }
-        .version-card.free .card-header .price { color: #34c759; }
-        .version-card.pro .card-header .price { color: #0a84ff; }
-
-        .version-card .card-description {
-            font-size: 0.95em;
-            color: #b0b0b0;
-            margin-bottom: 1.5em;
-            flex-grow: 1;
-        }
-
-        .version-card .feature-list {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 1.5em;
-            font-size: 0.95em;
-            color: #c0c0c0;
-        }
-        .version-card .feature-list li {
-            margin-bottom: 0.6em;
-            padding-left: 28px;
-            position: relative;
-        }
-        .version-card .feature-list li::before {
-            content: '✓';
-            color: #34c759;
-            position: absolute;
-            left: 0;
-            font-size: 1.3em;
-            font-weight: bold;
-            top: -2px;
-        }
-        .version-card.pro .feature-list li.pro-feature::before {
-             color: #34c759;
-        }
-        .version-card .feature-list li.not-included::before {
-            content: '✕';
-            color: #ff453a;
-        }
-        .version-card .card-footer {
-            margin-top: auto;
-            text-align: center;
-        }
-        .static-marketplace-buttons {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-        }
-        .static-marketplace-buttons .marketplace-button {
-            width: 100%;
-            max-width: 280px;
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            margin: 0;
-        }
-        .static-marketplace-buttons .marketplace-links-title {
-            font-size: 0.9em;
-            color: #a0a0a0;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-
-        /* === DOCUMENTATION CTA SECTION === */
-        .section-docs-cta .content-wrapper { /* This wrapper is already text-align: center */
-            text-align: center;
-        }
-        .section-docs-cta .button.secondary {
-            background-color: #484848;
-            border-color: #585858;
-            color: #f0f0f0;
-            margin: 8px;
-        }
-        .section-docs-cta .button.secondary:hover {
-            background-color: #535353;
-             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-        }
-
-        /* === FOOTER === */
-        .site-footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #1c1c1c;
-            color: #a0a0a0;
-        }
-        .site-footer p { margin-bottom: 0.5em; }
-        .site-footer p:last-child { margin-bottom: 0; }
-        .site-footer a { color: #5e9eff; text-decoration: none; }
-        .site-footer a:hover { text-decoration: underline; }
-
-        /* === FEATURE COMPARISON TABLE SECTION (No changes) === */
-        .section-feature-table { }
-        .table-responsive-wrapper { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; margin-top: 30px; border-radius: 8px; }
-        .feature-comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.95em; border-radius: 8px; overflow: hidden; }
-        /* ... (rest of table styles) ... */
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-primary selection:text-on-primary">
 
-    <header class="hero">
-        <div class="hero-text-content-top">
-            <h1>Transform Tools for Blender</h1>
-            <p class="subtitle">Precision, Speed, and Control for Your 3D Transformations.</p>
-            <p class="hero-docs-link-top">
-                <a href="https://idris-y.github.io/transform-tools-docs/" target="_blank" rel="noopener noreferrer">View Full Documentation ➔</a>
-            </p>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-[#131313]/95 border-b border-outline-variant/20 flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+        
+        <!-- Logo (Left) -->
+        <div class="text-xl font-headline font-bold tracking-tighter text-[#ffffff] uppercase relative z-10 w-48">
+            Transform Tools
+        </div>
+        
+        <!-- Navigation Links (Perfectly Centered) -->
+        <div class="hidden md:flex items-center justify-center gap-8 absolute left-1/2 -translate-x-1/2">
+            <a class="font-['Inter'] antialiased tracking-tight text-sm uppercase font-medium text-[#a3a3a3] hover:text-[#ffffff] transition-colors duration-200" href="#features">Features</a>
+            <a class="font-['Inter'] antialiased tracking-tight text-sm uppercase font-medium text-[#a3a3a3] hover:text-[#ffffff] transition-colors duration-200" href="#get">Get</a>
+            <a class="font-['Inter'] antialiased tracking-tight text-sm uppercase font-medium text-[#a3a3a3] hover:text-[#ffffff] transition-colors duration-200" href="#docs">Docs</a>
         </div>
 
-        <div class="hero-image-and-button-wrapper">
-            <img src="assets/images/transform-tools-lite-vs-full.png" alt="Transform Tools Lite vs Full Comparison - Panels and Gizmos" class="hero-image">
-            <div class="hero-cta-buttons-wrapper">
-                <div class="hero-cta-button-container button-lite-container">
-                    <a href="#version-lite" class="button green hero-main-button scroll-to-version">Get Transform Tools Lite</a>
-                </div>
-                <div class="hero-cta-button-container button-pro-container">
-                     <a href="#version-full" class="button primary hero-main-button scroll-to-version">Get Transform Tools</a>
-                </div>
-            </div>
-        </div>
-    </header>
+        <!-- Spacer to balance the flex layout -->
+        <div class="w-48 hidden md:block"></div>
+    </nav>
 
-    <main>
-        <section id="overview" class="section-overview">
-            <div class="content-wrapper" style="min-height: 300px;">
-                <h2>What is Transform Tools?</h2>
-                <p class="what-is-paragraph styled-intro-paragraph">
-                    Transform Tools enhances your Blender workflow with custom 3D gizmos, enabling precise control over object transformations and alignments.
-                </p>
-                <p class="how-it-works-paragraph styled-intro-paragraph">
-                    It works by defining 'Previous' and 'Active' gizmo states to execute transformations, from simple pose-to-pose adjustments to advanced constrained operations.
-                </p>
+    <main class="pt-24 pb-8 bg-background">
+        
+        <!-- Section 1: Hero (2:1 Ratio, Stacked Content) -->
+        <section class="px-4 md:px-8 w-full max-w-7xl mx-auto">
+            <!-- 2:1 Container with padding so content never touches edges -->
+            <div class="relative w-full aspect-[2/1] min-h-[450px] bg-surface-container border border-outline-variant/30 flex flex-col justify-center items-start p-6 md:p-12 overflow-hidden">
+                
+                <!-- Background Video & Transparency Overlay -->
+                <div class="absolute inset-0 z-0">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                        <source src="assets/hero-demo.webm" type="video/webm">
+                    </video>
+                    <!-- Transparency Overlay to make text legible -->
+                    <div class="absolute inset-0 bg-[#0a0a0a]/60 mix-blend-multiply"></div>
+                </div>
+
+                <!-- Content Wrapper (Title + Black Box) -->
+                <div class="relative z-10 flex flex-col gap-6 w-full max-w-3xl">
+                    
+                    <!-- Top Area: Floating Title Text -->
+                    <div>
+                        <div class="inline-block bg-surface-container-highest px-3 py-1 mb-4 border border-outline-variant/30 shadow-lg">
+                            <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-primary">Advanced Gizmo Logic</span>
+                        </div>
+                        <h1 class="font-headline text-4xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-tight uppercase text-primary drop-shadow-md">
+                            Precision, Speed, <br/>
+                            And Control. <br/>
+                        </h1>
+                    </div>
+
+                    <!-- Bottom Area: Black Box (Restricted width to align perfectly with Title) -->
+                    <div class="bg-[#0a0a0a] border border-outline-variant/30 p-6 md:p-8 max-w-[480px] shadow-2xl flex flex-col items-start gap-6">
+                        <p class="text-on-surface-variant font-medium leading-relaxed text-sm md:text-base font-mono">
+                            Enhance your Blender workflow with custom 3D gizmos. Define start and end states to execute complex pose-to-pose adjustments and constrained alignments in seconds.
+                        </p>
+                        
+                        <button onclick="document.getElementById('get').scrollIntoView({behavior: 'smooth'})" class="bg-primary text-on-primary px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+                            Get Transform Tools
+                            <span class="material-symbols-outlined text-[16px]">south</span>
+                        </button>
+                    </div>
+
+                </div>
             </div>
         </section>
 
-        <section id="versions" class="section-versions">
-            <div class="content-wrapper">
-                <h2>Choose Your Version</h2>
-                <div class="version-comparison">
-                    <!-- Lite Version Card -->
-                    <div class="version-card free" id="version-lite">
-                        <div class="card-header">
-                            <h3>Transform Tools Lite</h3>
-                            <p class="price">Free</p>
+        <!-- Section 2: Features (The Dual-Gizmo Workflow) -->
+        <section id="features" class="py-32 px-8 bg-background">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-baseline mb-24 gap-8">
+                    <h2 class="font-headline text-5xl font-bold tracking-tighter uppercase leading-none text-primary">The Dual-Gizmo<br/>Workflow</h2>
+                    <div class="max-w-3xl">
+                        <p class="text-on-surface-variant text-sm leading-relaxed font-mono">
+                            Transform Tools is built to give you exact mathematical control over how your elements move, rotate, and scale.
+                            By acting as a seamless data bridge, it allows you to effortlessly push and pull precise orientations between your Objects,
+                            custom Gizmos, and Blender's 3D Cursor.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Feature Card 1 -->
+                    <div class="relative flex flex-col justify-between aspect-square group border border-outline-variant/30 overflow-hidden">
+                        <!-- Background Video -->
+                        <div class="absolute inset-0 z-0">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <source src="assets/workflow-1.webm" type="video/webm">
+                            </video>
+                            <div class="absolute inset-0 bg-[#0a0a0a]/70 mix-blend-multiply transition-colors duration-500 group-hover:bg-[#0a0a0a]/50"></div>
                         </div>
-                        <p class="card-description">Get started with core functionality, perfect for everyday tasks and exploring the power of Transform Tools.</p>
-                        <ul class="feature-list">
-                            <li>All Gizmo Features</li>
-                            <li>Core "Transform" Operator</li>
-                            <li>Basic Options (Scale, Flip, etc.)</li>
-                            <li class="not-included">"Align" & "Move" Operators</li>
-                            <li class="not-included">Constrained Transforms Section</li>
-                            <li class="not-included">Advanced Options (Interpolation, etc.)</li>
-                        </ul>
-                        <div class="card-footer">
-                            <div class="static-marketplace-buttons">
-                                <p class="marketplace-links-title">Download From:</p>
-                                <p></p>
-                                <p class="marketplace-links-title">Coming soon</p>
-                                <p></p>
+                        
+                        <!-- Content Overlay -->
+                        <div class="relative z-10 p-6 flex flex-col justify-between h-full">
+                            <!-- Floating Title -->
+                            <div>
+                                <span class="font-mono text-[10px] text-primary mb-4 block uppercase tracking-[0.2em] drop-shadow-md">01 / Define Previous</span>
+                                <h3 class="font-headline text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Initial<br/>State</h3>
+                            </div>
+                            
+                            <!-- Black Box Description -->
+                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-5 shadow-2xl">
+                                <p class="text-on-surface-variant text-xs md:text-sm font-mono leading-relaxed">
+                                    Set the initial state by clicking, using the 3D cursor, or automatically generating a gizmo from your selected mesh data.
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Full Version Card -->
-                    <div class="version-card pro" id="version-full">
-                        <div class="card-header">
-                            <h3>Transform Tools</h3>
-                            <p class="price">Full Version</p>
+                    <!-- Feature Card 2 -->
+                    <div class="relative flex flex-col justify-between aspect-square group border border-outline-variant/30 overflow-hidden">
+                        <!-- Background Video -->
+                        <div class="absolute inset-0 z-0">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <source src="assets/workflow-2.webm" type="video/webm">
+                            </video>
+                            <div class="absolute inset-0 bg-[#0a0a0a]/70 mix-blend-multiply transition-colors duration-500 group-hover:bg-[#0a0a0a]/50"></div>
                         </div>
-                        <p class="card-description">Unlock the full suite of professional tools for maximum efficiency and creative control in your projects.</p>
-                        <ul class="feature-list">
-                            <li class="pro-feature">All Lite Features, plus:</li>
-                            <li class="pro-feature">"Align" Operator</li>
-                            <li class="pro-feature">"Move" Operator</li>
-                            <li class="pro-feature">All Constrained Transforms Features</li>
-                            <li class="pro-feature">Advanced Options (Interpolation, Lock, Count, Longest Arc)</li>
-                        </ul>
-                        <div class="card-footer">
-                             <div class="static-marketplace-buttons">
-                                <p class="marketplace-links-title">Get Full Version From:</p>
-                                <a href="https://idrisy.gumroad.com/l/transformtools" class="button primary marketplace-button">Gumroad.com</a>
-                                <a href="https://superhivemarket.com/products/transform-tools" class="button primary marketplace-button">superhivemarket.com</a>
+                        
+                        <!-- Content Overlay -->
+                        <div class="relative z-10 p-6 flex flex-col justify-between h-full">
+                            <!-- Floating Title -->
+                            <div>
+                                <span class="font-mono text-[10px] text-primary mb-4 block uppercase tracking-[0.2em] drop-shadow-md">02 / Define Active</span>
+                                <h3 class="font-headline text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Target<br/>Destination</h3>
+                            </div>
+                            
+                            <!-- Black Box Description -->
+                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-5 shadow-2xl">
+                                <p class="text-on-surface-variant text-xs md:text-sm font-mono leading-relaxed">
+                                    Set the target destination and orientation. Transform Tools calculates the exact spatial difference between the two gizmos.
+                                </p>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="relative flex flex-col justify-between aspect-square group border border-outline-variant/30 overflow-hidden">
+                        <!-- Background Video -->
+                        <div class="absolute inset-0 z-0">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <source src="assets/workflow-3.webm" type="video/webm">
+                            </video>
+                            <div class="absolute inset-0 bg-[#0a0a0a]/70 mix-blend-multiply transition-colors duration-500 group-hover:bg-[#0a0a0a]/50"></div>
+                        </div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="relative z-10 p-6 flex flex-col justify-between h-full">
+                            <!-- Floating Title -->
+                            <div>
+                                <span class="font-mono text-[10px] text-primary mb-4 block uppercase tracking-[0.2em] drop-shadow-md">03 / Execute</span>
+                                <h3 class="font-headline text-3xl font-bold uppercase text-primary drop-shadow-lg leading-tight">Perfect<br/>Alignment</h3>
+                            </div>
+                            
+                            <!-- Black Box Description -->
+                            <div class="bg-[#0a0a0a] border border-outline-variant/30 p-5 shadow-2xl">
+                                <p class="text-on-surface-variant text-xs md:text-sm font-mono leading-relaxed">
+                                    Instantly transform, move, rotate, or perfectly align your selection from the Previous state to the Active state.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="documentation-cta" class="section-docs-cta">
-            <div class="content-wrapper" style="min-height: 800px;">
-                <h2>Need Help or Want to Learn More?</h2>
-                <p class="styled-intro-paragraph"> <!-- ADDED CLASS -->
-                    Our comprehensive documentation provides detailed installation instructions, feature guides, usage examples, and troubleshooting tips to get you up and running smoothly.
-                </p>
-                <a href="https://idris-y.github.io/transform-tools-docs/" class="button secondary" target="_blank" rel="noopener noreferrer">View Documentation</a>
+        <!-- Section 3: Get Table -->
+        <section id="get" class="py-24 px-8 bg-surface border-y border-outline-variant/20">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-24">
+                    <h2 class="font-headline text-4xl font-bold tracking-tighter uppercase mb-4 text-primary">Get Transform Tools</h2>
+                    <p class="font-mono text-[10px] tracking-widest text-outline uppercase">Select your version</p>
+                </div>
+
+                <!-- Table Container -->
+                <div class="w-full border border-outline-variant/20 bg-surface-container-lowest p-1 mb-16">
+                    <!-- Table Header -->
+                    <div class="grid grid-cols-3 border-b border-outline-variant/30 pb-6 pt-6 px-4 bg-surface">
+                        <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-outline">Capability</div>
+                        <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-center text-outline">Core Version</div>
+                        <div class="text-[10px] font-mono uppercase tracking-[0.2em] text-center text-primary font-bold">Full Version</div>
+                    </div>
+
+                    <!-- Row 1 -->
+                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-sm font-bold uppercase text-primary pr-2">All Gizmo Definition Features</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline">check</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-sm font-bold uppercase text-primary pr-2">Core "Transform" Operator</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline">check</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-sm font-bold uppercase text-primary pr-2">Specific: Align, Move, Rotate, Scale</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-sm font-bold uppercase text-primary pr-2">Constrained Target Transforms</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/10">
+                        <div class="text-sm font-bold uppercase text-primary pr-2">Multi-Transform Arrays (Chains)</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    </div>
+
+                    <!-- Row 6 -->
+                    <div class="grid grid-cols-3 py-6 px-4 bg-surface hover:bg-surface-container-low transition-colors items-center border-b border-outline-variant/20">
+                        <div class="text-sm font-bold uppercase text-primary pr-2">Advanced Redo & Custom Skips</div>
+                        <div class="text-center"><span class="material-symbols-outlined text-outline-variant">close</span></div>
+                        <div class="text-center"><span class="material-symbols-outlined text-primary">check</span></div>
+                    </div>
+
+                    <!-- Action Buttons Aligned to Grid -->
+                    <div class="grid grid-cols-3 py-10 px-4 bg-surface items-start">
+                        <!-- Empty Cell 1 to maintain grid alignment -->
+                        <div></div>
+                        
+                        <!-- Core Actions (Aligned under Core Version) -->
+                        <div class="flex flex-col items-center justify-start relative px-2 dropdown-container">
+                            <span class="font-headline text-2xl font-bold mb-4 text-outline">FREE</span>
+                            <button onclick="toggleMenu('table-core-dropdown', event)" class="w-full border border-outline-variant text-primary text-[10px] py-4 uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex justify-center items-center gap-2">
+                                Download Core <span class="material-symbols-outlined text-[14px] pointer-events-none">expand_more</span>
+                            </button>
+                            <!-- Dropdown Menu opening DOWN -->
+                            <div id="table-core-dropdown" class="dropdown-menu hidden absolute top-full mt-2 w-full bg-surface-container-high border border-outline-variant/40 shadow-2xl z-20">
+                                <a href="https://extensions.blender.org/add-ons/" target="_blank" class="block px-4 py-4 text-center border-b border-outline-variant/20 hover:bg-surface-container-highest transition-colors">
+                                    <span class="font-bold block text-primary text-xs uppercase tracking-wider">Blender Extensions</span>
+                                </a>
+                                <a href="https://github.com/idris-y/transform_tools_core/releases/latest" target="_blank" class="block px-4 py-4 text-center hover:bg-surface-container-highest transition-colors">
+                                    <span class="font-bold block text-primary text-xs uppercase tracking-wider">GitHub Release</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Full Actions (Aligned under Full Version) -->
+                        <div class="flex flex-col items-center justify-start relative px-2 dropdown-container">
+                            <span class="font-headline text-2xl font-bold mb-4 text-primary">ALL FEATURES</span>
+                            <button onclick="toggleMenu('table-full-dropdown', event)" class="w-full bg-primary text-on-primary text-[10px] py-4 uppercase tracking-widest font-bold hover:bg-primary-container transition-colors flex justify-center items-center gap-2">
+                                Get Full Version <span class="material-symbols-outlined text-[14px] pointer-events-none">expand_more</span>
+                            </button>
+                            <!-- Dropdown Menu opening DOWN -->
+                            <div id="table-full-dropdown" class="dropdown-menu hidden absolute top-full mt-2 w-full bg-surface-container-high border border-outline-variant/40 shadow-2xl z-20">
+                                <a href="https://idrisy.gumroad.com/l/transformtools" target="_blank" class="flex justify-between items-center px-4 py-4 border-b border-outline-variant/20 hover:bg-surface-container-highest transition-colors">
+                                    <span class="font-bold text-primary text-xs uppercase tracking-wider">Gumroad</span>
+                                    <span class="font-mono text-primary font-bold text-xs">$12</span>
+                                </a>
+                                <a href="https://superhivemarket.com/products/transform-tools" target="_blank" class="flex justify-between items-center px-4 py-4 hover:bg-surface-container-highest transition-colors">
+                                    <span class="font-bold text-primary text-xs uppercase tracking-wider">Superhive</span>
+                                    <span class="font-mono text-primary font-bold text-xs">$15</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
+
+        <!-- Section 4: Documentation -->
+        <section id="docs" class="py-24 px-8 bg-background border-b border-outline-variant/20">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="w-16 h-16 border border-outline-variant/40 flex items-center justify-center bg-surface mx-auto mb-6">
+                    <span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+                </div>
+                <h2 class="font-headline text-3xl font-bold tracking-tighter uppercase mb-4 text-primary">Technical Documentation</h2>
+                <p class="text-sm text-outline font-mono uppercase leading-relaxed tracking-wider mb-10 max-w-xl mx-auto">
+                    Comprehensive manuals covering every operator, hotkey, and architectural logic. Select your engine version to proceed.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <!-- Core Docs Button -->
+                    <a href="https://idris-y.github.io/transform-tools-docs/core/" target="_blank" class="border border-outline-variant text-primary px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+                        Core Docs
+                        <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                    </a>
+                    <!-- Full Docs Button -->
+                    <a href="https://idris-y.github.io/transform-tools-docs/" target="_blank" class="bg-surface-container-highest border border-outline-variant/40 text-primary px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-surface-container-lowest transition-colors flex items-center justify-center gap-2">
+                        Full Version Docs
+                        <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="site-footer">
-        <p>© 2025 Yasser Idris</p>
-        <p>Transform Tools for Blender</p>
-        <p>Contact: <a href="mailto:idris.vy@gmail.com">idris.vy@gmail.com</a></p>
+    <!-- Footer -->
+    <footer class="w-full bg-[#0a0a0a] flex flex-col md:flex-row justify-between items-center px-8 py-12 gap-6">
+        <div class="text-sm font-headline font-bold text-primary tracking-widest uppercase">Transform Tools</div>
+        <div class="flex gap-8">
+            <a class="font-['Inter'] text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="mailto:idris.vy@gmail.com">Contact Developer</a>
+            <a class="font-['Inter'] text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="https://idris-y.github.io/transform-tools-docs/" target="_blank">Documentation</a>
+            <a class="font-['Inter'] text-[10px] tracking-[0.05em] uppercase text-outline hover:text-primary transition-colors" href="https://github.com/idris-y/transform-tools" target="_blank">GitHub Source</a>
+        </div>
+        <div class="font-mono text-[10px] tracking-[0.05em] uppercase text-outline">
+            © 2026 YASSER IDRIS. ALL RIGHTS RESERVED.
+        </div>
     </footer>
 
+    <!-- Robust Dropdown Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // --- Sticky Hero Buttons Script ---
-            const heroImageAndButtonWrapper = document.querySelector('.hero-image-and-button-wrapper');
-            const heroCtaButtonsWrapper = document.querySelector('.hero-cta-buttons-wrapper');
-
-            if (heroImageAndButtonWrapper && heroCtaButtonsWrapper) {
-                let buttonsHeight = heroCtaButtonsWrapper.offsetHeight;
-
-                function setButtonState(state) {
-                    heroCtaButtonsWrapper.classList.remove('is-viewport-stuck', 'is-pinned-top');
-                    if (state === 'sticky') {
-                        heroCtaButtonsWrapper.classList.add('is-viewport-stuck');
-                    } else if (state === 'pinned-top') {
-                        heroCtaButtonsWrapper.classList.add('is-pinned-top');
-                    }
-                }
-
-                function handleStickyButtons() {
-                    if (!heroCtaButtonsWrapper) return;
-                    const containerRect = heroImageAndButtonWrapper.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight;
-                    const fixedViewportBottomOffset = 20;
-
-                    const fixedButtonsTopInViewport = viewportHeight - fixedViewportBottomOffset - buttonsHeight;
-                    const fixedButtonsBottomInViewport = viewportHeight - fixedViewportBottomOffset;
-
-                    if (
-                        containerRect.top <= fixedButtonsTopInViewport &&
-                        containerRect.bottom >= fixedButtonsBottomInViewport
-                    ) {
-                        setButtonState('sticky');
-                    } else if (containerRect.bottom < fixedButtonsBottomInViewport && containerRect.bottom > 0) {
-                        setButtonState('default');
-                    } else if (containerRect.top > fixedButtonsTopInViewport && containerRect.top < viewportHeight) {
-                        setButtonState('default'); // Or potentially 'pinned-top' if distinct CSS handles transition
-                    } else {
-                        setButtonState('default');
-                    }
-                }
-
-                if (buttonsHeight > 0) {
-                    handleStickyButtons();
-                    window.addEventListener('scroll', handleStickyButtons, { passive: true });
-                    window.addEventListener('resize', () => {
-                        buttonsHeight = heroCtaButtonsWrapper.offsetHeight;
-                        if (buttonsHeight > 0) handleStickyButtons();
-                    }, { passive: true });
-                }
+        // Function to toggle specific menu
+        function toggleMenu(id, event) {
+            // Stop document click from instantly closing it
+            event.stopPropagation();
+            
+            const targetMenu = document.getElementById(id);
+            const isCurrentlyHidden = targetMenu.classList.contains('hidden');
+            
+            // First, close all dropdown menus
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.add('hidden');
+            });
+            
+            // If the menu we clicked was hidden, open it
+            if (isCurrentlyHidden) {
+                targetMenu.classList.remove('hidden');
             }
+        }
 
-            // --- Scroll to Version and Highlight Script ---
-            const scrollToVersionButtons = document.querySelectorAll('a.scroll-to-version');
-            scrollToVersionButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'center'
-                        });
-                        targetElement.classList.add('card-highlighted');
-                        setTimeout(() => {
-                            targetElement.classList.remove('card-highlighted');
-                        }, 1500);
-                    }
-                });
+        // Click anywhere on the page to close open menus
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.add('hidden');
             });
         });
     </script>

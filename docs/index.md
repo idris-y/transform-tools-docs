@@ -63,12 +63,6 @@ Transform Tools provides enhanced transformation capabilities in Blender using c
 3.  Find "Transform Tools" in the list and enable the checkbox.
 4.  The panel will appear in the 3D View's Sidebar (N-Panel) under the "TTools" tab, aka "Transform Tools".
 
-#### IMPORTANT NOTE: Upgrading or Installing Multiple Versions
-
-*   Please be aware that running multiple versions of the Transform Tools addon (e.g., having both "Full" and "Core" enabled) at the same time is not recommended and may cause conflicts.
-
-*   The recommended procedure for a clean upgrade is to first **disable and REMOVE** the existing version from Blender's Add-on Preferences. **Restarting Blender** before installing the new version is also advised to ensure all modules are fully unloaded.
-
 ---
 
 ### <span id="sec-cursor-snapping">Working with the 3D Cursor and Snapping</span>
