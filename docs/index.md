@@ -183,6 +183,10 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
     *   *Note:* The Alt key is **additive**. (e.g., Hold **Shift + Alt** to swap the Previous Gizmo pivot with its X-axis).
 
 *   <span id="op-global-align">![Global Align Icon](assets/icons/Global_Align.png) **Global Align**</span>: Resets the rotation of the Active Gizmo, aligning its local axes with the world's global X, Y, and Z axes. The gizmo's origin (location) and scale are not affected.
+    *   ***Modifier Keys (Specific Axis Alignment):***
+        *   **Shift + Click:** Align **X-axis** to global.
+        *   **Ctrl + Click:** Align **Y-axis** to global.
+        *   **Alt + Click:** Align **Z-axis** to global.
 
 *   <span id="op-copy" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Copy</span>: Copies the current transform components of the Active gizmo.
 
@@ -409,10 +413,13 @@ Whenever a valid smart alignment or tangency is successfully calculated during a
     *   **For Plane Targets:** Toggles between the two possible intersection points when applicable.
     *   **For Line Targets:** Toggles between the two possible intersection points.
 
-*   <span id="opt-xform-offset">**<code>Offset</code>:**</span> Offsets the constrained transformation result. The effect depends on the operation type:
+*   <span id="opt-xform-offset">**<code>Offset</code> / <code>Override</code>:**</span> Offsets the constrained transformation result. The effect depends on the operation type:
     *   **Rotate to:** Offsets the rotation angle (in degrees).
     *   **Move to:** Offsets the translation distance.
     *   **Scale to:** Offsets the scale factor.
+    *   **Absolute Mode Toggle (<span style="background-color: rgba(71, 114, 179, 0.67); color: white; padding: 2px 7px; border-radius: 3px; font-weight: bold;">+</span> / <span style="background-color: rgba(71, 114, 179, 0.67); color: white; padding: 2px 7px; border-radius: 3px; font-weight: bold;">=</span>):** Toggles how the offset value is applied. 
+        *   **Additive (`+`)**: The offset value is added to or subtracted from the calculated result. *the deafult*
+        *   **Absolute (`=`)**: The offset value directly *replaces* the calculated variable, giving you total control over the exact final position/angle/scale.
 
 *   <span id="opt-snap-cursor-constrained">**<code>Snap Cursor</code>:**</span> This checkbox primarily affects operations within the **Constrained Transforms Section**:
     1.  **Setup Behavior:** When enabled, selecting constraint types or target axes/directions automatically **snaps the 3D Cursor to relevant geometry** (e.g., axis origins, target points). This helps precisely set the starting point for the [`Move To`/`Rotate To`](#op-move-to-rotate-to-scale-to) operations *before* they are applied.
