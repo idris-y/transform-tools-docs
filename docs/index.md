@@ -184,9 +184,9 @@ The **3D Cursor** plays a vital role in several Transform Tools operations:
 
 *   <span id="op-global-align">![Global Align Icon](assets/icons/Global_Align.png) **Global Align**</span>: Resets the rotation of the Active Gizmo, aligning its local axes with the world's global X, Y, and Z axes. The gizmo's origin (location) and scale are not affected.
     *   ***Modifier Keys (Specific Axis Alignment):***
-        *   **Shift + Click:** Align **X-axis** to global.
-        *   **Ctrl + Click:** Align **Y-axis** to global.
-        *   **Alt + Click:** Align **Z-axis** to global.
+        *   **Shift + Click:** Align the gizmo's **X-axis** to the global X-axis.
+        *   **Ctrl + Click:** Align the gizmo's **Y-axis** to the global Y-axis.
+        *   **Alt + Click:** Align the gizmo's **Z-axis** to the global Z-axis.
 
 *   <span id="op-copy" style="background-color: rgba(0, 0, 0, 0.667); color: white; padding: 2px 5px; border-radius: 3px; font-weight: bold;">Copy</span>: Copies the current transform components of the Active gizmo.
 
